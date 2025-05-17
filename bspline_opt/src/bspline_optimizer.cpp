@@ -58,21 +58,21 @@ namespace fast_planner
 
         RCLCPP_INFO_STREAM(node_->get_logger(), "cost func: " << cost_str);
 
-        // ROS_INFO_STREAM("cost func: " << cost_str);
+       
     }
     void BsplineOptimizer::setParam(std::shared_ptr<rclcpp::Node> nh)
     {
         node_ = nh;
-        if (node_->has_parameter("optimization.lambda1"))
+        if (node_->has_parameter("optimization.jerk_smoothness_weight"))
         {
-            lambda1_ = node_->get_parameter("optimization.lambda1").as_double();
-            lambda2_ = node_->get_parameter("optimization.lambda2").as_double();
-            lambda3_ = node_->get_parameter("optimization.lambda3").as_double();
-            lambda4_ = node_->get_parameter("optimization.lambda4").as_double();
-            lambda5_ = node_->get_parameter("optimization.lambda5").as_double();
-            lambda6_ = node_->get_parameter("optimization.lambda6").as_double();
-            lambda7_ = node_->get_parameter("optimization.lambda7").as_double();
-            lambda8_ = node_->get_parameter("optimization.lambda8").as_double();
+            lambda1_ = node_->get_parameter("optimization.jerk_smoothness_weight").as_double();
+            lambda2_ = node_->get_parameter("optimization.distance_weight").as_double();
+            lambda3_ = node_->get_parameter("optimization.feasibility_weight").as_double();
+            lambda4_ = node_->get_parameter("optimization.end_point_weight").as_double();
+            lambda5_ = node_->get_parameter("optimization.guide_cost_weight").as_double();
+            lambda6_ = node_->get_parameter("optimization.visibility_cost_weight").as_double();
+            lambda7_ = node_->get_parameter("optimization.waypoints_cost_weight").as_double();
+            lambda8_ = node_->get_parameter("optimization.acc_smoothness").as_double();
 
             // nh.param("optimization/dist0", dist0_, -1.0);
             dist0_ = node_->get_parameter("optimization.dist0").as_double();
@@ -93,21 +93,21 @@ namespace fast_planner
             max_iteration_time_[2] = node_->get_parameter("optimization.max_iteration_time3").as_double();
             max_iteration_time_[3] = node_->get_parameter("optimization.max_iteration_time4").as_double();
 
-            algorithm1_ = node_->get_parameter("optimization.algorithm1").as_int();
-            algorithm2_ = node_->get_parameter("optimization.algorithm2").as_int();
+            algorithm1_ = node_->get_parameter("optimization.quadratic_cost").as_int();
+            algorithm2_ = node_->get_parameter("optimization.general_cost").as_int();
 
             order_ = node_->get_parameter("optimization.order").as_int();
             return;
         }
 
-        lambda1_ = node_->declare_parameter<double>("optimization.lambda1", 10.0);
-        lambda2_ = node_->declare_parameter<double>("optimization.lambda2", 8.0);
-        lambda3_ = node_->declare_parameter<double>("optimization.lambda3", 0.0001);
-        lambda4_ = node_->declare_parameter<double>("optimization.lambda4", 0.05);
-        lambda5_ = node_->declare_parameter<double>("optimization.lambda5", -1.0);
-        lambda6_ = node_->declare_parameter<double>("optimization.lambda6", -1.0);
-        lambda7_ = node_->declare_parameter<double>("optimization.lambda7", 100.0);
-        lambda8_ = node_->declare_parameter<double>("optimization.lambda8", -1.0);
+        lambda1_ = node_->declare_parameter<double>("optimization.jerk_smoothness_weight", 10.0);
+        lambda2_ = node_->declare_parameter<double>("optimization.distance_weight", 8.0);
+        lambda3_ = node_->declare_parameter<double>("optimization.feasibility_weight", 0.0001);
+        lambda4_ = node_->declare_parameter<double>("optimization.end_point_weight", 0.05);
+        lambda5_ = node_->declare_parameter<double>("optimization.guide_cost_weight", -1.0);
+        lambda6_ = node_->declare_parameter<double>("optimization.visibility_cost_weight", -1.0);
+        lambda7_ = node_->declare_parameter<double>("optimization.waypoints_cost_weight", 100.0);
+        lambda8_ = node_->declare_parameter<double>("optimization.acc_smoothness", -1.0);
 
         // nh.param("optimization/dist0", dist0_, -1.0);
         dist0_ = node_->declare_parameter<double>("optimization.dist0", 0.6);
@@ -128,8 +128,8 @@ namespace fast_planner
         max_iteration_time_[2] = node_->declare_parameter<double>("optimization.max_iteration_time3", 0.003);
         max_iteration_time_[3] = node_->declare_parameter<double>("optimization.max_iteration_time4", 0.003);
 
-        algorithm1_ = node_->declare_parameter<int>("optimization.algorithm1", 11);
-        algorithm2_ = node_->declare_parameter<int>("optimization.algorithm2", 15);
+        algorithm1_ = node_->declare_parameter<int>("optimization.quadratic_cost", 11);
+        algorithm2_ = node_->declare_parameter<int>("optimization.general_cost", 15);
 
         order_ = node_->declare_parameter<int>("optimization.order", 3);
     }
