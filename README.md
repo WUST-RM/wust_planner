@@ -1,13 +1,9 @@
-本代码在此环境下运行：  
-Ubuntu22.04 Ros2 Humble
+# 本项目基于 https://github.com/865749/Kinodynamic_esdf_mpc 进行设计与完善
 
-使用时需安装环境::
-1. ACADOtoolkit  
-2. nlopt
-3. ~~3. cppAD(已经废除)~~  
-###ACADO使用注意事项  
-需要创建模型对应的cpp->生成mpc代码->引入文件->调用代码;  
-
-所使用的仿真开源为：
-https://github.com/LihanChen2004/rmul24_gazebo_simulator
-
+作为nav2备用方案使用，生态方面不如nav2完善，但实际效果的通过性，开发的拓展性都更好，正尽可能优化为主方案中
+### 目前存在的问题
+* 规划全局性还是较差，地图系统暂时并不完善，有可能进入局部最优解反复replan
+* 控制路径不能完全匹配规划
+### 远期规划
+* 扩展为3d框架或者对加入高程/坡度因子，进行针对性优化
+* 开发实时建图方案-类似slamtoolbox
