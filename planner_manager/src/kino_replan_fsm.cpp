@@ -1,52 +1,65 @@
 #include "planner_manager/kino_replan_fsm.hpp"
 using namespace fast_planner;
 
+
 bool kino_replan_fsm::checkTrajCollision(double &distance)
 {
-
     double t_now = (rclcpp::Clock().now() - start_time).seconds();
-
     double tm, tmp;
     position_traj_.getTimeSpan(tm, tmp);
-    Eigen::Vector2d cur_pt = position_traj_.evaluateDeBoor(tm + t_now);
 
+    Eigen::Vector2d cur_pt = position_traj_.evaluateDeBoor(tm + t_now);
     double radius = 0.0;
     Eigen::Vector2d fut_pt;
-    double fut_t = 0.02;
+    double fut_t = traj_collision_sample_step_;
+
+    int danger_count = 0;
 
     while (radius < safe_check_distance && t_now + fut_t < duration_)
     {
         fut_pt = position_traj_.evaluateDeBoor(tm + t_now + fut_t);
+
         if (CarType)
         {
             for (const auto &point : local_points)
             {
-                Eigen::Vector2d correct = {fut_pt.x() + point.x() * cos(odom_rpy(2)) - point.y() * sin(odom_rpy(2)),
-                                           fut_pt.y() + point.x() * sin(odom_rpy(2)) + point.y() * cos(odom_rpy(2))};
+                Eigen::Vector2d correct = {
+                    fut_pt.x() + point.x() * cos(odom_rpy(2)) - point.y() * sin(odom_rpy(2)),
+                    fut_pt.y() + point.x() * sin(odom_rpy(2)) + point.y() * cos(odom_rpy(2))};
+
                 double dist = edt_environment_->evaluateCoarseEDT(correct, -1.0);
-                if (dist <= 0 || edt_environment_->sdf_map_->isInMap(correct) == 0)
+                if (dist <= 0 || !edt_environment_->sdf_map_->isInMap(correct))
                 {
-                    distance = radius;
-                    return false;
+                    danger_count++;
+                    if (danger_count >= traj_collision_danger_limit_)
+                    {
+                        distance = radius;
+                        return false;
+                    }
                 }
             }
         }
         else
         {
             double dist = edt_environment_->evaluateCoarseEDT(fut_pt, -1.0);
-            if (dist <= Car_radius || edt_environment_->sdf_map_->isInMap(fut_pt) == 0)
+            if (dist <= Car_radius || !edt_environment_->sdf_map_->isInMap(fut_pt))
             {
-                distance = radius;
-                return false;
+                danger_count++;
+                if (danger_count >= traj_collision_danger_limit_)
+                {
+                    distance = radius;
+                    return false;
+                }
             }
         }
 
         radius = (fut_pt - cur_pt).norm();
-        fut_t += 0.02;
+        fut_t += traj_collision_sample_step_;
     }
 
     return true;
 }
+
 bool kino_replan_fsm::checkPredictPathCollision()
 {
     int danger_count = 0;

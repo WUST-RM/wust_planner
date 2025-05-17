@@ -5,7 +5,9 @@
 #include "bspline/non_uniform_bspline.hpp"
 #include "planner_manager/mpc.hpp"
 #include "bspline_opt/bspline_optimizer.hpp"
+#include <cstdlib>
 #include <geometry_msgs/msg/pose_with_covariance_stamped.hpp>
+#include <iostream>
 #include <tf2_ros/transform_broadcaster.h>
 #include <geometry_msgs/msg/transform_stamped.hpp>
 #include <nav_msgs/msg/path.hpp>
@@ -113,6 +115,8 @@ namespace fast_planner
             safe_check_distance = this->declare_parameter<double>("manager.safe_check_distance", 3.0);
             predict_collision_danger_limit_=  this->declare_parameter<int>("manager.predict_collision_danger_limit", 5);
             predict_collision_sample_step_=  this->declare_parameter<int>("manager.predict_collision_sample_step", 2);
+            traj_collision_danger_limit_=  this->declare_parameter<int>("manager.traj_collision_danger_limit", 5);
+            traj_collision_sample_step_=  this->declare_parameter<double>("manager.traj_collision_sample_step", 0.02);
             Car_radius = l;
             double half_l = l / 2.0;
             double half_w = w / 2.0;
@@ -349,11 +353,10 @@ namespace fast_planner
                 }
             }
         }
-        bool mode = 0;
-        int nihao = 0;
+
 
         void plan_timer_callback()
-        {
+        {   
             // std::cout << "start_yaw_" << start_yaw_ << std::endl;
             static int fsm_num = 0;
             fsm_num++;
@@ -365,6 +368,8 @@ namespace fast_planner
                     //cout << "wait for goal." << endl;
                 fsm_num = 0;
             }
+            FSM_EXEC_STATE current_state = exec_state_;
+            
             switch (exec_state_)
             {
             case INIT:
@@ -385,34 +390,42 @@ namespace fast_planner
             }
             case WAIT_TARGET:
             {
+    
+                if (prev_exec_state_ != WAIT_TARGET) {
+                 
+                    wait_target_start_time_ = rclcpp::Clock().now();
+                }
+
                 have_traj = false;
                 trigger_ = false;
-                // if (nihao < 6)
-                // {
-                //     end_pt_ = {std::get<0>(arr[nihao]).pose.position.x, std::get<0>(arr[nihao]).pose.position.y};
-                //     mode = std::get<1>(arr[nihao]);
-                //     edt_environment_->sdf_map_->setLocalMap(std::get<2>(arr[nihao]));
-                //     std::this_thread::sleep_for(std::chrono::milliseconds(100));
-                //     nihao++;
-                //     trigger_ = true;
-                // }
-                geometry_msgs::msg::Twist twist;
-                // rmoss_interfaces::msg::ChassisCMDmind cmd_;
-                twist.linear.x = 0;
-                twist.linear.y = 0;
-                twist.angular.z = 0;
-                // cmd_.twist = twist;
-                // cmd_.mode = 1;
-                if (control_output)
-                    cmd_vel_pub->publish(twist);
-                if (!trigger_)
+
+                // 计算经过时间
+                auto now = rclcpp::Clock().now();
+                double elapsed_seconds = (now - wait_target_start_time_).seconds();
+
+             
+                if (elapsed_seconds < 1.5) {
+                    if (!(odom_vel_.norm() < 0.05) || (std::abs(start_yaw_(1)) < 0.05)) {
+                        geometry_msgs::msg::Twist twist;
+                        twist.linear.x = 0;
+                        twist.linear.y = 0;
+                        twist.angular.z = 0;
+                        if (control_output) {
+                            cmd_vel_pub->publish(twist);
+                        }
+                    }
+                }
+
+     
+                if (!trigger_) {
+                    prev_exec_state_ = current_state;
                     return;
-                else
-                {
+                } else {
                     exec_state_ = GEN_NEW_TRAJ;
                 }
                 break;
             }
+
             case EXEC_TRAJ:
             {
                 auto pre_position = position_traj_.evaluateDeBoorT((rclcpp::Clock().now() - start_time).seconds());
@@ -467,12 +480,16 @@ namespace fast_planner
                 break;
             }
             }
-            if (exec_state_ == EXEC_TRAJ && (end_pt_ - init_pose).norm() < 0.2 && (odom_vel_).norm() < 0.1)
+            prev_exec_state_ = current_state;
+            if (exec_state_ == EXEC_TRAJ && (end_pt_ - init_pose).norm() < 0.2 && (odom_vel_).norm() < 0.05 )
             {
                 Last_position_traj = position_traj_;
+                
                 exec_state_ = WAIT_TARGET;
             }
         }
+
+
         int collision_replan_count = 0;
         bool plan(Eigen::Vector2d position, Eigen::Vector2d vel_, Eigen::Vector2d acc_, Eigen::Vector2d end_pt, Eigen::Vector2d end_vel);
         std::tuple<geometry_msgs::msg::PoseStamped, bool, int> arr[6];
@@ -504,8 +521,9 @@ namespace fast_planner
         }
     
 
-        // std::unique_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
+
         FSM_EXEC_STATE exec_state_ = INIT;
+        FSM_EXEC_STATE prev_exec_state_ = INIT ;
         double target_yaw = 0;
         bool have_traj = false;
         bool is_inited = false;
@@ -516,6 +534,11 @@ namespace fast_planner
         double safe_check_distance;
         int predict_collision_danger_limit_;
         int predict_collision_sample_step_;
+        int traj_collision_danger_limit_;
+        double traj_collision_sample_step_;
+        rclcpp::Time wait_target_start_time_;
+
+
         // int N;
         // double dt;
         rclcpp::Time start_time;

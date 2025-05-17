@@ -18,9 +18,11 @@
       #矩形底盘长宽,当为圆形底盘时，取Car_L为半径，单位为m
       Car_L : 0.2
       Car_W : 0.3
-      safe_check_distance : 5.0
-      predict_collision_sample_step : 2
-      predict_collision_danger_limit : 3
+      safe_check_distance: 5.0
+      traj_collision.danger_limit: 3
+      traj_collision_sample_step: 0.02
+      predict_collision_sample_step: 2
+      predict_collision_danger_limit: 5
     sdf_map:
       use_global_map: true
       #没全局地图时使用
