@@ -1,0 +1,42 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/hy/ACE/install/planner_manager/include/**",
+        "/home/hy/ACE/install/rmoss_interfaces/include/**",
+        "/home/hy/ACE/install/pointcloud_to_laserscan/include/**",
+        "/home/hy/ACE/install/path_searching/include/**",
+        "/home/hy/ACE/install/bspline_opt/include/**",
+        "/home/hy/ACE/install/bspline/include/**",
+        "/home/hy/ACE/install/plan_env/include/**",
+        "/home/hy/ACE/install/icp_registration/include/**",
+        "/home/hy/ACE/install/fast_lio/include/**",
+        "/home/hy/ACE/install/livox_ros_driver2/include/**",
+        "/home/hy/ACE/install/linefit_ground_segmentation/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/hy/ACE/src/Kinodynamic_esdf_mpc/bspline/include/**",
+        "/home/hy/ACE/src/Kinodynamic_esdf_mpc/bspline_opt/include/**",
+        "/home/hy/ACE/src/Kinodynamic_esdf_mpc/fast_lio/include/**",
+        "/home/hy/ACE/src/Kinodynamic_esdf_mpc/icp_registration/include/**",
+        "/home/hy/ACE/src/Kinodynamic_esdf_mpc/lakibeam1_ros2_v1_0_0/include/**",
+        "/home/hy/ACE/src/Kinodynamic_esdf_mpc/linefit_ground_segementation_ros2/linefit_ground_segmentation/include/**",
+        "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/include/**",
+        "/home/hy/ACE/src/Kinodynamic_esdf_mpc/plan_env/include/**",
+        "/home/hy/ACE/src/Kinodynamic_esdf_mpc/planner_manager/include/**",
+        "/home/hy/ACE/src/Kinodynamic_esdf_mpc/point_lio/include/**",
+        "/home/hy/ACE/src/Kinodynamic_esdf_mpc/pointcloud_to_laserscan/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

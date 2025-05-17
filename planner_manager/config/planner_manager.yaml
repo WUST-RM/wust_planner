@@ -1,0 +1,98 @@
+/**:
+  ros__parameters:
+    manager:
+      odometry: odometry
+      goal_topic: goal_pose
+      base_frame: gimbal_yaw
+      max_vel_: 2.5
+      max_acc_: 0.8
+      max_jerk_: 1.0
+      dynamic_environment: 0
+      control_points_distance: 0.5
+      cmd_vel: cmd_vel
+      control_cmd_frequency: 100
+      safety_cheak_frequency: 20
+      plan_cheak_frequency: 20
+      control_output: true
+      CarType: 0 # 0是圆形底盘 1是矩形底盘
+      #矩形底盘长宽,当为圆形底盘时，取Car_L为半径，单位为m
+      Car_L : 0.2
+      Car_W : 0.3
+      safe_check_distance : 5.0
+    sdf_map:
+      use_global_map: true
+      #没全局地图时使用
+      map_size_x: 30.0
+      map_size_y: 30.0
+      resolusion_: 0.05
+      # origin_x: -6.35
+      # origin_y: -7.6
+      #有全局地图时使用
+      global_map_num: 1
+      global_map_path:
+      
+       #- "/home/hy/ACE/src/Kinodynamic_esdf_mpc/planner_manager/map/rmuc_2025.yaml"
+       #- "/home/hy/ACE/src/Kinodynamic_esdf_mpc/planner_manager/map/RMUC2025.yaml"
+        # - "/home/z/Ouuu_fast_planner_2D/src/planner_manager/map/RMUC1.yaml"
+      
+       - "/home/hy/ACE/src/Kinodynamic_esdf_mpc/planner_manager/map/rmuc_2025a.yaml"
+       
+
+      #laser_topic: obstacle_scana
+      pointcloud_topic: /terrain_map_ext
+      min_obstacle_intensity: 0.2
+      max_obstacle_intensity: 2.0
+      min_obstacle_height: 0.1
+      max_obstacle_height: 0.4
+      gmpcl: terrain_map_ext
+      show_esdf_time: false
+      local_update_range_x: 5.0
+      local_update_range_y: 5.0
+      local_map_margin: 10
+      frame_id: map
+      obstacles_inflation: 0.0001
+    search:
+      max_tau: 1.0
+      init_max_tau: 0.5
+      lambda_heu: 5.0
+      max_vel: 2.5
+      max_acc: 0.8
+      w_time: 5.0
+      horizon: 100.0
+      near_end_threshold: 0.2
+      resolution_astar: 0.05
+      time_resolution: 0.8
+      allocate_num: 1000000
+      check_num: 30
+
+    optimization:
+      max_vel: 2.5
+      max_acc: 0.8
+      dist0: 0.6
+      lambda1: 20.0
+      lambda2: 8.0
+      lambda3: 0.00001
+      lambda4: 0.05
+      lambda5: -1.0
+      lambda6: -1.0
+      lambda7: 100.0
+      lambda8: -1.0
+      max_iteration_num1: 2
+      max_iteration_num2: 300
+      max_iteration_num3: 200
+      max_iteration_num4: 200
+      max_iteration_time1: 0.0001
+      max_iteration_time2: 0.005
+      max_iteration_time3: 0.003
+      max_iteration_time4: 0.003
+      algorithm1: 11
+      algorithm2: 15
+      order: 3
+    
+    mpc:
+      weight_p: 500.0
+      weight_yaw: 0.1
+      weight_v: 10.0
+      weight_w: 5.5
+
+

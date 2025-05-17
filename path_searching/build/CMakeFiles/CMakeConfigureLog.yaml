@@ -1,0 +1,2051 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/CMakeDetermineSystem.cmake:204 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Linux - 6.8.0-57-generic - x86_64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/local/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/local/share/cmake-3.26/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /usr/bin/gcc-12 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+      
+      The C compiler identification is GNU, found in:
+        /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/3.26.5/CompilerIdC/a.out
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/local/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/local/share/cmake-3.26/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /usr/bin/c++ 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is GNU, found in:
+        /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/3.26.5/CompilerIdCXX/a.out
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-CeI1Sm"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-CeI1Sm"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-CeI1Sm
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_a7bfc && [1/2] /usr/bin/gcc-12   -v -o CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.o -c /usr/local/share/cmake-3.26/Modules/CMakeCCompilerABI.c
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/gcc-12
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 12.3.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-12/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-12 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 12.3.0 (Ubuntu 12.3.0-1ubuntu1~22.04) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_a7bfc.dir/'
+         /usr/lib/gcc/x86_64-linux-gnu/12/cc1 -quiet -v -imultiarch x86_64-linux-gnu /usr/local/share/cmake-3.26/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_a7bfc.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccBeFzmH.s
+        GNU C17 (Ubuntu 12.3.0-1ubuntu1~22.04) version 12.3.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 12.3.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/12/include-fixed"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/12/../../../../x86_64-linux-gnu/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/lib/gcc/x86_64-linux-gnu/12/include
+         /usr/local/include
+         /usr/include/x86_64-linux-gnu
+         /usr/include
+        End of search list.
+        GNU C17 (Ubuntu 12.3.0-1ubuntu1~22.04) version 12.3.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 12.3.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        Compiler executable checksum: d93534411cccf908c6f3926ba41cb359
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_a7bfc.dir/'
+         as -v --64 -o CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.o /tmp/ccBeFzmH.s
+        GNU assembler version 2.38 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.38
+        COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.'
+        [2/2] : && /usr/bin/gcc-12  -v CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.o -o cmTC_a7bfc   && :
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/gcc-12
+        COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/12/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 12.3.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-12/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-12 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 12.3.0 (Ubuntu 12.3.0-1ubuntu1~22.04) 
+        COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_a7bfc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_a7bfc.'
+         /usr/lib/gcc/x86_64-linux-gnu/12/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/12/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/12/lto-wrapper -plugin-opt=-fresolution=/tmp/cczEnFME.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_a7bfc /usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/12/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/12 -L/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/12/../../.. CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/12/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crtn.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_a7bfc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_a7bfc.'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "/usr/local/share/cmake-3.26/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/lib/gcc/x86_64-linux-gnu/12/include]
+          add: [/usr/local/include]
+          add: [/usr/include/x86_64-linux-gnu]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/12/include] ==> [/usr/lib/gcc/x86_64-linux-gnu/12/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/usr/lib/gcc/x86_64-linux-gnu/12/include;/usr/local/include;/usr/include/x86_64-linux-gnu;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:152 (message)"
+      - "/usr/local/share/cmake-3.26/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-CeI1Sm]
+        ignore line: []
+        ignore line: [Run Build Command(s):/usr/bin/ninja -v cmTC_a7bfc && [1/2] /usr/bin/gcc-12   -v -o CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.o -c /usr/local/share/cmake-3.26/Modules/CMakeCCompilerABI.c]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/gcc-12]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 12.3.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-12/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-12 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 12.3.0 (Ubuntu 12.3.0-1ubuntu1~22.04) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_a7bfc.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/12/cc1 -quiet -v -imultiarch x86_64-linux-gnu /usr/local/share/cmake-3.26/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_a7bfc.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccBeFzmH.s]
+        ignore line: [GNU C17 (Ubuntu 12.3.0-1ubuntu1~22.04) version 12.3.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 12.3.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/12/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/12/../../../../x86_64-linux-gnu/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/12/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/include/x86_64-linux-gnu]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [GNU C17 (Ubuntu 12.3.0-1ubuntu1~22.04) version 12.3.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 12.3.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [Compiler executable checksum: d93534411cccf908c6f3926ba41cb359]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_a7bfc.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.o /tmp/ccBeFzmH.s]
+        ignore line: [GNU assembler version 2.38 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.38]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.']
+        ignore line: [[2/2] : && /usr/bin/gcc-12  -v CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.o -o cmTC_a7bfc   && :]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/gcc-12]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/12/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 12.3.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-12/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-12 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 12.3.0 (Ubuntu 12.3.0-1ubuntu1~22.04) ]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_a7bfc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_a7bfc.']
+        link line: [ /usr/lib/gcc/x86_64-linux-gnu/12/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/12/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/12/lto-wrapper -plugin-opt=-fresolution=/tmp/cczEnFME.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_a7bfc /usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/12/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/12 -L/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/12/../../.. CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/12/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crtn.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/12/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/12/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/12/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/cczEnFME.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_a7bfc] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/Scrt1.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crti.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/12/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/12/crtbeginS.o]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/12] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/12]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib]
+          arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/12/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/12/../../..]
+          arg [CMakeFiles/cmTC_a7bfc.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [-lc] ==> lib [c]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/12/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/12/crtendS.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crtn.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crtn.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/Scrt1.o] ==> [/usr/lib/x86_64-linux-gnu/Scrt1.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crti.o] ==> [/usr/lib/x86_64-linux-gnu/crti.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crtn.o] ==> [/usr/lib/x86_64-linux-gnu/crtn.o]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/12] ==> [/usr/lib/gcc/x86_64-linux-gnu/12]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/12/../../..] ==> [/usr/lib]
+        implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+        implicit objs: [/usr/lib/x86_64-linux-gnu/Scrt1.o;/usr/lib/x86_64-linux-gnu/crti.o;/usr/lib/gcc/x86_64-linux-gnu/12/crtbeginS.o;/usr/lib/gcc/x86_64-linux-gnu/12/crtendS.o;/usr/lib/x86_64-linux-gnu/crtn.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/12;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-5Lt73K"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-5Lt73K"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-5Lt73K
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_02823 && [1/2] /usr/bin/c++   -v -o CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_02823.dir/'
+         /usr/lib/gcc/x86_64-linux-gnu/11/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/local/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_02823.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/cco6kQx7.s
+        GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 11.4.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/11"
+        ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/include-fixed"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/../../../../x86_64-linux-gnu/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/include/c++/11
+         /usr/include/x86_64-linux-gnu/c++/11
+         /usr/include/c++/11/backward
+         /usr/lib/gcc/x86_64-linux-gnu/11/include
+         /usr/local/include
+         /usr/include/x86_64-linux-gnu
+         /usr/include
+        End of search list.
+        GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 11.4.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        Compiler executable checksum: d591828bb4d392ae8b7b160e5bb0b95f
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_02823.dir/'
+         as -v --64 -o CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.o /tmp/cco6kQx7.s
+        GNU assembler version 2.38 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.38
+        COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.'
+        [2/2] : && /usr/bin/c++  -v CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_02823   && :
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) 
+        COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_02823' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_02823.'
+         /usr/lib/gcc/x86_64-linux-gnu/11/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccEvfv1Y.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_02823 /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/11 -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/11/../../.. CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_02823' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_02823.'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "/usr/local/share/cmake-3.26/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/include/c++/11]
+          add: [/usr/include/x86_64-linux-gnu/c++/11]
+          add: [/usr/include/c++/11/backward]
+          add: [/usr/lib/gcc/x86_64-linux-gnu/11/include]
+          add: [/usr/local/include]
+          add: [/usr/include/x86_64-linux-gnu]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/usr/include/c++/11] ==> [/usr/include/c++/11]
+        collapse include dir [/usr/include/x86_64-linux-gnu/c++/11] ==> [/usr/include/x86_64-linux-gnu/c++/11]
+        collapse include dir [/usr/include/c++/11/backward] ==> [/usr/include/c++/11/backward]
+        collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/11/include] ==> [/usr/lib/gcc/x86_64-linux-gnu/11/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/usr/include/c++/11;/usr/include/x86_64-linux-gnu/c++/11;/usr/include/c++/11/backward;/usr/lib/gcc/x86_64-linux-gnu/11/include;/usr/local/include;/usr/include/x86_64-linux-gnu;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:152 (message)"
+      - "/usr/local/share/cmake-3.26/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-5Lt73K]
+        ignore line: []
+        ignore line: [Run Build Command(s):/usr/bin/ninja -v cmTC_02823 && [1/2] /usr/bin/c++   -v -o CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_02823.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/11/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/local/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_02823.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/cco6kQx7.s]
+        ignore line: [GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 11.4.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/11"]
+        ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/../../../../x86_64-linux-gnu/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/include/c++/11]
+        ignore line: [ /usr/include/x86_64-linux-gnu/c++/11]
+        ignore line: [ /usr/include/c++/11/backward]
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/11/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/include/x86_64-linux-gnu]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 11.4.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [Compiler executable checksum: d591828bb4d392ae8b7b160e5bb0b95f]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_02823.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.o /tmp/cco6kQx7.s]
+        ignore line: [GNU assembler version 2.38 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.38]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [[2/2] : && /usr/bin/c++  -v CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_02823   && :]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) ]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_02823' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_02823.']
+        link line: [ /usr/lib/gcc/x86_64-linux-gnu/11/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccEvfv1Y.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_02823 /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/11 -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/11/../../.. CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccEvfv1Y.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_02823] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib]
+          arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../..]
+          arg [CMakeFiles/cmTC_02823.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o] ==> [/usr/lib/x86_64-linux-gnu/Scrt1.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o] ==> [/usr/lib/x86_64-linux-gnu/crti.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o] ==> [/usr/lib/x86_64-linux-gnu/crtn.o]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11] ==> [/usr/lib/gcc/x86_64-linux-gnu/11]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../..] ==> [/usr/lib]
+        implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+        implicit objs: [/usr/lib/x86_64-linux-gnu/Scrt1.o;/usr/lib/x86_64-linux-gnu/crti.o;/usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o;/usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o;/usr/lib/x86_64-linux-gnu/crtn.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/11;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/CheckCSourceCompiles.cmake:76 (cmake_check_source_compiles)"
+      - "/usr/local/share/cmake-3.26/Modules/FindThreads.cmake:97 (CHECK_C_SOURCE_COMPILES)"
+      - "/usr/local/share/cmake-3.26/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/spdlog/spdlogConfig.cmake:40 (find_package)"
+      - "/opt/ros/humble/share/rcl_logging_spdlog/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/humble/share/rcl_logging_spdlog/cmake/rcl_logging_spdlogConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/rcl/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/humble/share/rcl/cmake/rclConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/libstatistics_collector/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/humble/share/libstatistics_collector/cmake/libstatistics_collectorConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/rclcpp/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/humble/share/rclcpp/cmake/rclcppConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:11 (ament_auto_find_build_dependencies)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-SdU2Qg"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-SdU2Qg"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-SdU2Qg
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_33c6f && [1/2] /usr/bin/gcc-12 -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_33c6f.dir/src.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-SdU2Qg/src.c
+        [2/2] : && /usr/bin/gcc-12   CMakeFiles/cmTC_33c6f.dir/src.c.o -o cmTC_33c6f   && :
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindOpenMP.cmake:219 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindOpenMP.cmake:483 (_OPENMP_GET_FLAGS)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:330 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "Detecting C OpenMP compiler info"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-VdhLXG"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-VdhLXG"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_C_fopenmp"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-VdhLXG
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_d9883 && [1/2] /usr/bin/gcc-12   -fopenmp -v -o CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-VdhLXG/OpenMPTryFlag.c
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/gcc-12
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 12.3.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-12/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-12 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 12.3.0 (Ubuntu 12.3.0-1ubuntu1~22.04) 
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.o' '-c' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'CMakeFiles/cmTC_d9883.dir/'
+         /usr/lib/gcc/x86_64-linux-gnu/12/cc1 -quiet -v -imultiarch x86_64-linux-gnu -D_REENTRANT /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-VdhLXG/OpenMPTryFlag.c -quiet -dumpdir CMakeFiles/cmTC_d9883.dir/ -dumpbase OpenMPTryFlag.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fopenmp -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccNiExzX.s
+        GNU C17 (Ubuntu 12.3.0-1ubuntu1~22.04) version 12.3.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 12.3.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/12/include-fixed"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/12/../../../../x86_64-linux-gnu/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/lib/gcc/x86_64-linux-gnu/12/include
+         /usr/local/include
+         /usr/include/x86_64-linux-gnu
+         /usr/include
+        End of search list.
+        GNU C17 (Ubuntu 12.3.0-1ubuntu1~22.04) version 12.3.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 12.3.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        Compiler executable checksum: d93534411cccf908c6f3926ba41cb359
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.o' '-c' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'CMakeFiles/cmTC_d9883.dir/'
+         as -v --64 -o CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.o /tmp/ccNiExzX.s
+        GNU汇编版本 2.38 (x86_64-linux-gnu) 使用BFD版本 (GNU Binutils for Ubuntu) 2.38
+        COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.o' '-c' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.'
+        [2/2] : && /usr/bin/gcc-12 -fopenmp -v  CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.o -o cmTC_d9883  -v && :
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/gcc-12
+        COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/12/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 12.3.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-12/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-12 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 12.3.0 (Ubuntu 12.3.0-1ubuntu1~22.04) 
+        COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../:/lib/:/usr/lib/
+        Reading specs from /usr/lib/gcc/x86_64-linux-gnu/12/libgomp.spec
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_d9883' '-v' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'cmTC_d9883.'
+         /usr/lib/gcc/x86_64-linux-gnu/12/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/12/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/12/lto-wrapper -plugin-opt=-fresolution=/tmp/ccMsip88.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_d9883 /usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/12/crtbeginS.o /usr/lib/gcc/x86_64-linux-gnu/12/crtoffloadbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/12 -L/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/12/../../.. CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.o -lgomp -lgcc --push-state --as-needed -lgcc_s --pop-state -lpthread -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/12/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crtn.o /usr/lib/gcc/x86_64-linux-gnu/12/crtoffloadend.o
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_d9883' '-v' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'cmTC_d9883.'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindOpenMP.cmake:262 (message)"
+      - "/usr/local/share/cmake-3.26/Modules/FindOpenMP.cmake:483 (_OPENMP_GET_FLAGS)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:330 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    message: |
+      Parsed C OpenMP implicit link information from above output:
+        link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-VdhLXG]
+        ignore line: []
+        ignore line: [Run Build Command(s):/usr/bin/ninja -v cmTC_d9883 && [1/2] /usr/bin/gcc-12   -fopenmp -v -o CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-VdhLXG/OpenMPTryFlag.c]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/gcc-12]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 12.3.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-12/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-12 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 12.3.0 (Ubuntu 12.3.0-1ubuntu1~22.04) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.o' '-c' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'CMakeFiles/cmTC_d9883.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/12/cc1 -quiet -v -imultiarch x86_64-linux-gnu -D_REENTRANT /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-VdhLXG/OpenMPTryFlag.c -quiet -dumpdir CMakeFiles/cmTC_d9883.dir/ -dumpbase OpenMPTryFlag.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fopenmp -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccNiExzX.s]
+        ignore line: [GNU C17 (Ubuntu 12.3.0-1ubuntu1~22.04) version 12.3.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 12.3.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/12/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/12/../../../../x86_64-linux-gnu/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/12/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/include/x86_64-linux-gnu]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [GNU C17 (Ubuntu 12.3.0-1ubuntu1~22.04) version 12.3.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 12.3.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [Compiler executable checksum: d93534411cccf908c6f3926ba41cb359]
+        ignore line: [COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.o' '-c' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'CMakeFiles/cmTC_d9883.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.o /tmp/ccNiExzX.s]
+        ignore line: [GNU汇编版本 2.38 (x86_64-linux-gnu) 使用BFD版本 (GNU Binutils for Ubuntu) 2.38]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.o' '-c' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.']
+        ignore line: [[2/2] : && /usr/bin/gcc-12 -fopenmp -v  CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.o -o cmTC_d9883  -v && :]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/gcc-12]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/12/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 12.3.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-12/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-12 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-12-ALHxjy/gcc-12-12.3.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 12.3.0 (Ubuntu 12.3.0-1ubuntu1~22.04) ]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/12/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/12/../../../:/lib/:/usr/lib/]
+        ignore line: [Reading specs from /usr/lib/gcc/x86_64-linux-gnu/12/libgomp.spec]
+        ignore line: [COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_d9883' '-v' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'cmTC_d9883.']
+        link line: [ /usr/lib/gcc/x86_64-linux-gnu/12/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/12/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/12/lto-wrapper -plugin-opt=-fresolution=/tmp/ccMsip88.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_d9883 /usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/12/crtbeginS.o /usr/lib/gcc/x86_64-linux-gnu/12/crtoffloadbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/12 -L/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/12/../../.. CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.o -lgomp -lgcc --push-state --as-needed -lgcc_s --pop-state -lpthread -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/12/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crtn.o /usr/lib/gcc/x86_64-linux-gnu/12/crtoffloadend.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/12/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/12/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/12/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccMsip88.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_d9883] ==> ignore
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/12] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/12]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib]
+          arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/12/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/12/../../..]
+          arg [CMakeFiles/cmTC_d9883.dir/OpenMPTryFlag.c.o] ==> ignore
+          arg [-lgomp] ==> lib [gomp]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [-lpthread] ==> lib [pthread]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/12] ==> [/usr/lib/gcc/x86_64-linux-gnu/12]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/12/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/12/../../..] ==> [/usr/lib]
+        implicit libs: [gomp;gcc;gcc_s;pthread;c;gcc;gcc_s]
+        implicit objs: []
+        implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/12;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindOpenMP.cmake:219 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindOpenMP.cmake:483 (_OPENMP_GET_FLAGS)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:330 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "Detecting CXX OpenMP compiler info"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-I7wfev"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-I7wfev"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_CXX_fopenmp"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-I7wfev
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_97e9b && [1/2] /usr/bin/c++   -fopenmp -v -o CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-I7wfev/OpenMPTryFlag.cpp
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) 
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'CMakeFiles/cmTC_97e9b.dir/'
+         /usr/lib/gcc/x86_64-linux-gnu/11/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE -D_REENTRANT /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-I7wfev/OpenMPTryFlag.cpp -quiet -dumpdir CMakeFiles/cmTC_97e9b.dir/ -dumpbase OpenMPTryFlag.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fopenmp -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/cc0kQajj.s
+        GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 11.4.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/11"
+        ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/include-fixed"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/../../../../x86_64-linux-gnu/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/include/c++/11
+         /usr/include/x86_64-linux-gnu/c++/11
+         /usr/include/c++/11/backward
+         /usr/lib/gcc/x86_64-linux-gnu/11/include
+         /usr/local/include
+         /usr/include/x86_64-linux-gnu
+         /usr/include
+        End of search list.
+        GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 11.4.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        Compiler executable checksum: d591828bb4d392ae8b7b160e5bb0b95f
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'CMakeFiles/cmTC_97e9b.dir/'
+         as -v --64 -o CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.o /tmp/cc0kQajj.s
+        GNU汇编版本 2.38 (x86_64-linux-gnu) 使用BFD版本 (GNU Binutils for Ubuntu) 2.38
+        COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.'
+        [2/2] : && /usr/bin/c++ -fopenmp -v  CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.o -o cmTC_97e9b  -v && :
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) 
+        COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/
+        Reading specs from /usr/lib/gcc/x86_64-linux-gnu/11/libgomp.spec
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_97e9b' '-v' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'cmTC_97e9b.'
+         /usr/lib/gcc/x86_64-linux-gnu/11/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccK9zmZ0.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_97e9b /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o /usr/lib/gcc/x86_64-linux-gnu/11/crtoffloadbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/11 -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/11/../../.. CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.o -lstdc++ -lm -lgomp -lgcc_s -lgcc -lpthread -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o /usr/lib/gcc/x86_64-linux-gnu/11/crtoffloadend.o
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_97e9b' '-v' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'cmTC_97e9b.'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindOpenMP.cmake:262 (message)"
+      - "/usr/local/share/cmake-3.26/Modules/FindOpenMP.cmake:483 (_OPENMP_GET_FLAGS)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:330 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    message: |
+      Parsed CXX OpenMP implicit link information from above output:
+        link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-I7wfev]
+        ignore line: []
+        ignore line: [Run Build Command(s):/usr/bin/ninja -v cmTC_97e9b && [1/2] /usr/bin/c++   -fopenmp -v -o CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-I7wfev/OpenMPTryFlag.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'CMakeFiles/cmTC_97e9b.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/11/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE -D_REENTRANT /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-I7wfev/OpenMPTryFlag.cpp -quiet -dumpdir CMakeFiles/cmTC_97e9b.dir/ -dumpbase OpenMPTryFlag.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fopenmp -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/cc0kQajj.s]
+        ignore line: [GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 11.4.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/11"]
+        ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/../../../../x86_64-linux-gnu/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/include/c++/11]
+        ignore line: [ /usr/include/x86_64-linux-gnu/c++/11]
+        ignore line: [ /usr/include/c++/11/backward]
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/11/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/include/x86_64-linux-gnu]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 11.4.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [Compiler executable checksum: d591828bb4d392ae8b7b160e5bb0b95f]
+        ignore line: [COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'CMakeFiles/cmTC_97e9b.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.o /tmp/cc0kQajj.s]
+        ignore line: [GNU汇编版本 2.38 (x86_64-linux-gnu) 使用BFD版本 (GNU Binutils for Ubuntu) 2.38]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.']
+        ignore line: [[2/2] : && /usr/bin/c++ -fopenmp -v  CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.o -o cmTC_97e9b  -v && :]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) ]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/]
+        ignore line: [Reading specs from /usr/lib/gcc/x86_64-linux-gnu/11/libgomp.spec]
+        ignore line: [COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_97e9b' '-v' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'cmTC_97e9b.']
+        link line: [ /usr/lib/gcc/x86_64-linux-gnu/11/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccK9zmZ0.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_97e9b /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o /usr/lib/gcc/x86_64-linux-gnu/11/crtoffloadbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/11 -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/11/../../.. CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.o -lstdc++ -lm -lgomp -lgcc_s -lgcc -lpthread -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o /usr/lib/gcc/x86_64-linux-gnu/11/crtoffloadend.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccK9zmZ0.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_97e9b] ==> ignore
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib]
+          arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../..]
+          arg [CMakeFiles/cmTC_97e9b.dir/OpenMPTryFlag.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgomp] ==> lib [gomp]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lpthread] ==> lib [pthread]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11] ==> [/usr/lib/gcc/x86_64-linux-gnu/11]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../..] ==> [/usr/lib]
+        implicit libs: [stdc++;m;gomp;gcc_s;gcc;pthread;c;gcc_s;gcc]
+        implicit objs: []
+        implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/11;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindOpenMP.cmake:419 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindOpenMP.cmake:557 (_OPENMP_GET_SPEC_DATE)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:330 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "Detecting CXX OpenMP version"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-JW1zrV"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-JW1zrV"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "OpenMP_SPECTEST_CXX_"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-JW1zrV
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_6164e && [1/2] /usr/bin/c++   -fopenmp -o CMakeFiles/cmTC_6164e.dir/OpenMPCheckVersion.cpp.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-JW1zrV/OpenMPCheckVersion.cpp
+        [2/2] : && /usr/bin/c++ -fopenmp  CMakeFiles/cmTC_6164e.dir/OpenMPCheckVersion.cpp.o -o cmTC_6164e   && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-uowasp"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-uowasp"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-uowasp
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_3222a && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_3222a.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-uowasp/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_3222a.dir/test_mpi.c.o -o cmTC_3222a  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/CheckLibraryExists.cmake:71 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindX11.cmake:498 (check_library_exists)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:1149 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-QSsJqB"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-QSsJqB"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "X11_LIB_X11_SOLO"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-QSsJqB
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_13fcd && [1/2] /usr/bin/gcc-12   -DCHECK_FUNCTION_EXISTS=XOpenDisplay -o CMakeFiles/cmTC_13fcd.dir/CheckFunctionExists.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-QSsJqB/CheckFunctionExists.c
+        [2/2] : && /usr/bin/gcc-12 -DCHECK_FUNCTION_EXISTS=XOpenDisplay  CMakeFiles/cmTC_13fcd.dir/CheckFunctionExists.c.o -o cmTC_13fcd  /lib/x86_64-linux-gnu/libX11.so  /lib/x86_64-linux-gnu/libXext.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/CheckFunctionExists.cmake:91 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindX11.cmake:513 (check_function_exists)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:1149 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-xRfVVQ"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-xRfVVQ"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "CMAKE_HAVE_GETHOSTBYNAME"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-xRfVVQ
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_f96ca && [1/2] /usr/bin/gcc-12   -DCHECK_FUNCTION_EXISTS=gethostbyname -o CMakeFiles/cmTC_f96ca.dir/CheckFunctionExists.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-xRfVVQ/CheckFunctionExists.c
+        [2/2] : && /usr/bin/gcc-12 -DCHECK_FUNCTION_EXISTS=gethostbyname  CMakeFiles/cmTC_f96ca.dir/CheckFunctionExists.c.o -o cmTC_f96ca   && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/CheckFunctionExists.cmake:91 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindX11.cmake:527 (check_function_exists)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:1149 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-jthBTb"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-jthBTb"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "CMAKE_HAVE_CONNECT"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-jthBTb
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_ef32a && [1/2] /usr/bin/gcc-12   -DCHECK_FUNCTION_EXISTS=connect -o CMakeFiles/cmTC_ef32a.dir/CheckFunctionExists.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-jthBTb/CheckFunctionExists.c
+        [2/2] : && /usr/bin/gcc-12 -DCHECK_FUNCTION_EXISTS=connect  CMakeFiles/cmTC_ef32a.dir/CheckFunctionExists.c.o -o cmTC_ef32a   && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/CheckFunctionExists.cmake:91 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindX11.cmake:536 (check_function_exists)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:1149 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-cIcVom"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-cIcVom"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "CMAKE_HAVE_REMOVE"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-cIcVom
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_901d7 && [1/2] /usr/bin/gcc-12   -DCHECK_FUNCTION_EXISTS=remove -o CMakeFiles/cmTC_901d7.dir/CheckFunctionExists.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-cIcVom/CheckFunctionExists.c
+        [2/2] : && /usr/bin/gcc-12 -DCHECK_FUNCTION_EXISTS=remove  CMakeFiles/cmTC_901d7.dir/CheckFunctionExists.c.o -o cmTC_901d7   && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/CheckFunctionExists.cmake:91 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindX11.cmake:545 (check_function_exists)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:1149 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-TMTFV7"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-TMTFV7"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "CMAKE_HAVE_SHMAT"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-TMTFV7
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_f59d6 && [1/2] /usr/bin/gcc-12   -DCHECK_FUNCTION_EXISTS=shmat -o CMakeFiles/cmTC_f59d6.dir/CheckFunctionExists.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-TMTFV7/CheckFunctionExists.c
+        [2/2] : && /usr/bin/gcc-12 -DCHECK_FUNCTION_EXISTS=shmat  CMakeFiles/cmTC_f59d6.dir/CheckFunctionExists.c.o -o cmTC_f59d6   && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/CheckLibraryExists.cmake:71 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindX11.cmake:555 (check_library_exists)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:1149 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-LrtcEX"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-LrtcEX"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "CMAKE_LIB_ICE_HAS_ICECONNECTIONNUMBER"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-LrtcEX
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_d9f75 && [1/2] /usr/bin/gcc-12   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber -o CMakeFiles/cmTC_d9f75.dir/CheckFunctionExists.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-LrtcEX/CheckFunctionExists.c
+        [2/2] : && /usr/bin/gcc-12 -DCHECK_FUNCTION_EXISTS=IceConnectionNumber  CMakeFiles/cmTC_d9f75.dir/CheckFunctionExists.c.o -o cmTC_d9f75  -lICE && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:572 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-E69J6v"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-E69J6v"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-E69J6v
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_47240 && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_47240.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-E69J6v/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_47240.dir/test_mpi.c.o -o cmTC_47240  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-bCFXZx"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-bCFXZx"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-bCFXZx
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_1c16b && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_1c16b.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-bCFXZx/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_1c16b.dir/test_mpi.c.o -o cmTC_1c16b  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-w5rvxH"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-w5rvxH"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-w5rvxH
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_c8849 && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_c8849.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-w5rvxH/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_c8849.dir/test_mpi.c.o -o cmTC_c8849  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:572 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-ZlSdkc"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-ZlSdkc"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-ZlSdkc
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_30a1d && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_30a1d.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-ZlSdkc/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_30a1d.dir/test_mpi.c.o -o cmTC_30a1d  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-eN00OW"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-eN00OW"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-eN00OW
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_7118f && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_7118f.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-eN00OW/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_7118f.dir/test_mpi.c.o -o cmTC_7118f  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-h4miQX"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-h4miQX"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-h4miQX
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_90913 && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_90913.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-h4miQX/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_90913.dir/test_mpi.c.o -o cmTC_90913  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:572 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-8IMudx"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-8IMudx"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-8IMudx
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_5730d && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_5730d.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-8IMudx/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_5730d.dir/test_mpi.c.o -o cmTC_5730d  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-UjzIi1"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-UjzIi1"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-UjzIi1
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_7d088 && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_7d088.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-UjzIi1/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_7d088.dir/test_mpi.c.o -o cmTC_7d088  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-LqNpkB"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-LqNpkB"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-LqNpkB
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_b94f5 && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_b94f5.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-LqNpkB/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_b94f5.dir/test_mpi.c.o -o cmTC_b94f5  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:572 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-fuXM4z"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-fuXM4z"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-fuXM4z
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_ff165 && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_ff165.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-fuXM4z/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_ff165.dir/test_mpi.c.o -o cmTC_ff165  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-6d5RfT"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-6d5RfT"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-6d5RfT
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_0bf2f && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_0bf2f.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-6d5RfT/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_0bf2f.dir/test_mpi.c.o -o cmTC_0bf2f  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-3SN4Jr"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-3SN4Jr"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-3SN4Jr
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_a2347 && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_a2347.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-3SN4Jr/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_a2347.dir/test_mpi.c.o -o cmTC_a2347  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:572 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-AeQLLs"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-AeQLLs"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-AeQLLs
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_d6f47 && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_d6f47.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-AeQLLs/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_d6f47.dir/test_mpi.c.o -o cmTC_d6f47  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-T6VPf9"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-T6VPf9"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-T6VPf9
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_2a5f1 && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_2a5f1.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-T6VPf9/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_2a5f1.dir/test_mpi.c.o -o cmTC_2a5f1  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-tUZe4f"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-tUZe4f"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-tUZe4f
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_28127 && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_28127.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-tUZe4f/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_28127.dir/test_mpi.c.o -o cmTC_28127  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:572 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-y10HnL"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-y10HnL"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-y10HnL
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_c657a && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_c657a.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-y10HnL/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_c657a.dir/test_mpi.c.o -o cmTC_c657a  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-ZS1dT0"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-ZS1dT0"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-ZS1dT0
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_1cc6f && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_1cc6f.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-ZS1dT0/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_1cc6f.dir/test_mpi.c.o -o cmTC_1cc6f  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-NEVF7A"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-NEVF7A"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-NEVF7A
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_6579d && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_6579d.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-NEVF7A/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_6579d.dir/test_mpi.c.o -o cmTC_6579d  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:572 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-toe3gM"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-toe3gM"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-toe3gM
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_eeb49 && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_eeb49.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-toe3gM/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_eeb49.dir/test_mpi.c.o -o cmTC_eeb49  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-GPlOLR"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-GPlOLR"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-GPlOLR
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_46f4b && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_46f4b.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-GPlOLR/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_46f4b.dir/test_mpi.c.o -o cmTC_46f4b  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-uNbDws"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-uNbDws"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-uNbDws
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_9b433 && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_9b433.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-uNbDws/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_9b433.dir/test_mpi.c.o -o cmTC_9b433  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:572 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-pszJ9Z"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-pszJ9Z"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-pszJ9Z
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_0aed8 && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_0aed8.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-pszJ9Z/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_0aed8.dir/test_mpi.c.o -o cmTC_0aed8  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/local/share/cmake-3.26/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:269 (find_package)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:318 (find_VTK)"
+      - "/usr/local/share/pcl-1.15/PCLConfig.cmake:569 (find_external_library)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/home/hy/ACE/install/plan_env/share/plan_env/cmake/plan_envConfig.cmake:41 (include)"
+      - "/opt/ros/humble/share/ament_cmake_auto/cmake/ament_auto_find_build_dependencies.cmake:67 (find_package)"
+      - "CMakeLists.txt:12 (ament_auto_find_build_dependencies)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-ys2VXl"
+      binary: "/home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-ys2VXl"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/humble/share/fastrtps_cmake_module/cmake/Modules;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_hoofs;/opt/ros/humble/lib/x86_64-linux-gnu/cmake/iceoryx_posh;/usr/local/share/pcl-1.15/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-ys2VXl
+        
+        Run Build Command(s):/usr/bin/ninja -v cmTC_fddfc && [1/2] /usr/bin/gcc-12  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_fddfc.dir/test_mpi.c.o -c /home/hy/ACE/src/Kinodynamic_esdf_mpc/path_searching/build/CMakeFiles/CMakeScratch/TryCompile-ys2VXl/test_mpi.c
+        [2/2] : && /usr/bin/gcc-12  -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_fddfc.dir/test_mpi.c.o -o cmTC_fddfc  /lib/x86_64-linux-gnu/libmpi.so && :
+        
+      exitCode: 0
+...
