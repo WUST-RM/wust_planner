@@ -76,6 +76,8 @@ void SDFMap::initMap(std::shared_ptr<rclcpp::Node> nh)
 	// mp_.map_origin_ = Eigen::Vector2d(-x_size / 2.0, -y_size / 2.0);
 	// mp_.map_size_ = Eigen::Vector2d(x_size, y_size);
 	mp_.show_esdf_time_ = node_->declare_parameter<bool>("sdf_map.show_esdf_time", false);
+	md_.Global_Map_online = md_.Global_Maps[md_.current_global_map];
+
 
 	// md_.tmp_buffer1_ = vector<double>(buffer_size, 0);
 	mp_.map_min_boundary_ = mp_.map_origin_;
@@ -90,16 +92,21 @@ void SDFMap::initMap(std::shared_ptr<rclcpp::Node> nh)
 	RCLCPP_INFO(node_->get_logger(), "Odometry topic: %s", odom_topic.c_str());
 	odom_sub_ = node_->create_subscription<nav_msgs::msg::Odometry>(odom_topic, 10,
 																	std::bind(&SDFMap::odomCallback, this, std::placeholders::_1));
-	std::string gmpcl_topic = node_->declare_parameter<std::string>("sdf_map.gmpcl","");
-	gmpcl_sub_ = node_->create_subscription<sensor_msgs::msg::PointCloud2>(gmpcl_topic, 10,
-																		std::bind(&SDFMap::UpdateGMCallbackUpdate, this, std::placeholders::_1));
-
+	std::string gobalmap_online_topic = node_->declare_parameter<std::string>("sdf_map.gobalmap_online.pointcloud_topic","");
+	gobalmap_online_sub_ = node_->create_subscription<sensor_msgs::msg::PointCloud2>(gobalmap_online_topic, 10,
+																		std::bind(&SDFMap::updateGobalMapOnlineCallback, this, std::placeholders::_1));
+	gobalmap_min_obstacle_intensity_= node_->declare_parameter<double>("sdf_map.gobalmap_online.min_obstacle_intensity", 0.0);
+	gobalmap_max_obstacle_intensity_= node_->declare_parameter<double>("sdf_map.gobalmap_online.max_obstacle_intensity", 2.0);
+	gobalmap_min_obstacle_height_=  node_->declare_parameter<double>("sdf_map.gobalmap_online.min_obstacle_height", -1.0);
+	gobalmap_max_obstacle_height_=  node_->declare_parameter<double>("sdf_map.gobalmap_online.max_obstacle_height", 1.0);
+	gobalmap_blind_distance_ = node_->declare_parameter<double>("sdf_map.gobalmap_online.blind_distance", 0.2);
 	//std::string laser_topic = node_->declare_parameter<std::string>("sdf_map.laser_topic", "scan");
-	std::string pointcloud_topic = node_->declare_parameter<std::string>("sdf_map.pointcloud_topic", "");
-	min_obstacle_intensity_= node_->declare_parameter<double>("sdf_map.min_obstacle_intensity", 0.0);
-	max_obstacle_intensity_= node_->declare_parameter<double>("sdf_map.max_obstacle_intensity", 2.0);
-	min_obstacle_height_=  node_->declare_parameter<double>("sdf_map.min_obstacle_height", -1.0);
-	max_obstacle_height_=  node_->declare_parameter<double>("sdf_map.max_obstacle_height", 1.0);
+	std::string pointcloud_topic = node_->declare_parameter<std::string>("sdf_map.localmap.pointcloud_topic", "");
+	localmap_min_obstacle_intensity_= node_->declare_parameter<double>("sdf_map.localmap.min_obstacle_intensity", 0.0);
+	localmap_max_obstacle_intensity_= node_->declare_parameter<double>("sdf_map.localmap.max_obstacle_intensity", 2.0);
+	localmap_min_obstacle_height_=  node_->declare_parameter<double>("sdf_map.localmap.min_obstacle_height", -1.0);
+	localmap_max_obstacle_height_=  node_->declare_parameter<double>("sdf_map.localmap.max_obstacle_height", 1.0);
+	localmap_blind_distance_ = node_->declare_parameter<double>("sdf_map.localmap.blind_distance", 0.2);
 	//laser_sub_.subscribe(node_, laser_topic, rmw_qos_profile_sensor_data);
 	pointcloud_sub_.subscribe(node_, pointcloud_topic, rmw_qos_profile_sensor_data);
 
@@ -244,141 +251,10 @@ Global_Map SDFMap::load_map(std::string &path, const std::string &frame,int& map
 	mp_.map_voxel_num_(0) = std::max(gm.map_voxel_num_(0), mp_.map_voxel_num_(0));
 	mp_.map_voxel_num_(1) = std::max(gm.map_voxel_num_(1), mp_.map_voxel_num_(1));
 	map_buffer_size = std::max(map_buffer_size,buffer_size);
+	
 	return gm;
 }
-// Global_Map SDFMap::load_map(std::string &path, const std::string &frame, int &map_buffer_size, MappingParameters &mp)
-// {
-//     // 打开并读取YAML元数据
-//     Global_Map gm;
-//     gm.path = path;
-//     cv::FileStorage fs(path, cv::FileStorage::READ);
-//     if (!fs.isOpened())
-//     {
-//         RCLCPP_ERROR(rclcpp::get_logger("load_map"), "Failed to open YAML file");
-//         throw std::runtime_error("Failed to open YAML file.");
-//     }
 
-//     // 获取元数据中的map分辨率和原点信息
-//     float resolution = 0.0;
-//     float occupied_thresh = 0.0;
-//     cv::Point3f origin;
-//     fs["resolution"] >> resolution;
-//     fs["origin"] >> origin;
-//     fs["occupied_thresh"] >> occupied_thresh;
-
-//     if (resolution <= 0.0)
-//     {
-//         RCLCPP_ERROR(rclcpp::get_logger("load_map"), "Invalid map resolution: %f", resolution);
-//         throw std::invalid_argument("Invalid map resolution.");
-//     }
-//     gm.resolution_ = resolution;
-//     gm.map_origin_ = {origin.x, origin.y};
-
-//     size_t dot_pos = path.find_last_of('.');
-
-//     if (dot_pos != std::string::npos)
-//     {
-//         path.replace(dot_pos, path.length() - dot_pos, ".pgm");
-//     }
-//     else
-//     {
-//         std::cerr << "No file extension found in the input path!" << std::endl;
-//     }
-//     cv::Mat image = cv::imread(path, cv::IMREAD_GRAYSCALE);
-
-//     if (image.empty())
-//     {
-//         RCLCPP_ERROR(rclcpp::get_logger("load_map"), "Failed to load PGM image");
-//         throw std::runtime_error("Failed to load PGM image.");
-//     }
-
-//     gm.image_size = {image.rows, image.cols};
-//     gm.map_size_ = {image.cols * gm.resolution_, image.rows * gm.resolution_};
-
-//     for (int i = 0; i < 2; ++i)
-//         gm.map_voxel_num_(i) = ceil(gm.map_size_(i) / gm.resolution_);
-
-//     int buffer_size = gm.map_voxel_num_(0) * gm.map_voxel_num_(1);
-
-//     gm.occupancy_buffer_inflate_Global_Map = std::vector<char>(buffer_size, 0);
-
-//     cv::normalize(image, image, 0, 1, cv::NORM_MINMAX);
-
-//     auto msg = std::make_shared<nav_msgs::msg::OccupancyGrid>();
-//     msg->header.stamp = rclcpp::Clock().now();
-//     msg->header.frame_id = frame;
-//     msg->info.resolution = gm.resolution_;
-//     msg->info.width = image.cols;
-//     msg->info.height = image.rows;
-//     msg->info.origin.position.x = gm.map_origin_[0];
-//     msg->info.origin.position.y = gm.map_origin_[1];
-//     msg->info.origin.position.z = 0.0;
-//     msg->data.resize(gm.map_voxel_num_(0) * gm.map_voxel_num_(1));
-//     for (int y = 0; y < image.rows; ++y)
-//     {
-//         for (int x = 0; x < image.cols; ++x)
-//         {
-//             int pixelValue = image.at<uchar>(y, x);
-//             if (pixelValue < occupied_thresh)
-//             {
-//                 msg->data[image.cols * (image.rows - y - 1) + x] = 100;
-//             }
-//             else
-//                 msg->data[image.cols * (image.rows - y - 1) + x] = 0;
-//         }
-//     }
-//     map_msgs.push_back(msg);
-//     cv::flip(image, image, 0);
-
-//     std::cout << "image.rows:" << image.rows << std::endl
-//               << "image.cols:" << image.cols << std::endl;
-
-//     // 填充occupancy_buffer_inflate_Global_Map
-//     for (int y = 0; y < image.rows; ++y)
-//     {
-//         for (int x = 0; x < image.cols; ++x)
-//         {
-//             int pixelValue = image.at<uchar>(y, x);
-//             if (pixelValue < occupied_thresh)
-//             {
-//                 gm.occupancy_buffer_inflate_Global_Map[x * gm.map_voxel_num_(1) + y] = 1;
-//             }
-//         }
-//     }
-
-//     // —— 连接中断的像素（闭运算）开始 —— //
-//     cv::Mat occupancy_map(image.rows, image.cols, CV_8UC1, cv::Scalar(0));
-//     for (int y = 0; y < image.rows; ++y)
-//     {
-//         for (int x = 0; x < image.cols; ++x)
-//         {
-//             occupancy_map.at<uchar>(y, x) = (gm.occupancy_buffer_inflate_Global_Map[x * gm.map_voxel_num_(1) + y] == 1) ? 255 : 0;
-//         }
-//     }
-
-//     cv::Mat closed_map;
-//     cv::morphologyEx(occupancy_map, closed_map, cv::MORPH_CLOSE,
-//                      cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3)));
-
-//     for (int y = 0; y < closed_map.rows; ++y)
-//     {
-//         for (int x = 0; x < closed_map.cols; ++x)
-//         {
-//             gm.occupancy_buffer_inflate_Global_Map[x * gm.map_voxel_num_(1) + y] = (closed_map.at<uchar>(y, x) > 0) ? 1 : 0;
-//         }
-//     }
-//     // —— 连接中断的像素（闭运算）结束 —— //
-
-//     mp.resolution_ = gm.resolution_;
-//     mp.map_origin_ = gm.map_origin_;
-//     mp_.map_size_(0) = std::max(image.cols * gm.resolution_, mp_.map_size_(0));
-//     mp_.map_size_(1) = std::max(image.rows * gm.resolution_, mp_.map_size_(1));
-//     mp_.map_voxel_num_(0) = std::max(gm.map_voxel_num_(0), mp_.map_voxel_num_(0));
-//     mp_.map_voxel_num_(1) = std::max(gm.map_voxel_num_(1), mp_.map_voxel_num_(1));
-//     map_buffer_size = std::max(map_buffer_size, buffer_size);
-
-//     return gm;
-// }
 
 
 void SDFMap::resetBuffer(Eigen::Vector2d min_pos, Eigen::Vector2d max_pos)
@@ -399,19 +275,10 @@ void SDFMap::resetBuffer(Eigen::Vector2d min_pos, Eigen::Vector2d max_pos)
 			md_.distance_buffer_[toAddress(x, y)] = 10000;
 		}
 }
-// void SDFMap::odomCallback(const nav_msgs::msg::Odometry::ConstSharedPtr &odom)
-// {
-// 	md_.laser_pos_(0) = odom->pose.pose.position.x;
-// 	md_.laser_pos_(1) = odom->pose.pose.position.y;
-// 	md_.laser_pos_(2) = odom->pose.pose.position.z;
-// 	md_.laser_q_ = Eigen::Quaterniond(odom->pose.pose.orientation.w, odom->pose.pose.orientation.x,
-// 									  odom->pose.pose.orientation.y, odom->pose.pose.orientation.z);
-// 	md_.has_odom_ = true;
-// 	// std::cout << "sdf_odom" << std::endl;
-// }
+
 void SDFMap::odomCallback(const nav_msgs::msg::Odometry::ConstSharedPtr &odom)
 {
-	// 查询 map->odom 的 tf 变换
+
 	geometry_msgs::msg::TransformStamped tf_map_odom;
 	try
 	{
@@ -423,7 +290,6 @@ void SDFMap::odomCallback(const nav_msgs::msg::Odometry::ConstSharedPtr &odom)
 		return;
 	}
 
-	// odom 下的 laser 位姿
 	Eigen::Vector3d p_odom_laser(odom->pose.pose.position.x,
 								 odom->pose.pose.position.y,
 								 odom->pose.pose.position.z);
@@ -433,7 +299,6 @@ void SDFMap::odomCallback(const nav_msgs::msg::Odometry::ConstSharedPtr &odom)
 									odom->pose.pose.orientation.y,
 									odom->pose.pose.orientation.z);
 
-	// map->odom 变换
 	Eigen::Vector3d t_map_odom(tf_map_odom.transform.translation.x,
 							   tf_map_odom.transform.translation.y,
 							   tf_map_odom.transform.translation.z);
@@ -443,13 +308,10 @@ void SDFMap::odomCallback(const nav_msgs::msg::Odometry::ConstSharedPtr &odom)
 								  tf_map_odom.transform.rotation.y,
 								  tf_map_odom.transform.rotation.z);
 
-	// laser 在 map 坐标系下的位置 (x, y, z 全都补偿)
 	Eigen::Vector3d p_map_laser = q_map_odom * p_odom_laser + t_map_odom;
 
-	// laser 在 map 下的姿态
 	Eigen::Quaterniond q_map_laser = q_map_odom * q_odom_laser;
 
-	// 更新到 md_（x, y 进 laser_pos_, z 进 laser_z_）
 	md_.laser_pos_(0) = p_map_laser.x();
 	md_.laser_pos_(1) = p_map_laser.y();
 	md_.laser_z_ = p_map_laser.z();
@@ -463,27 +325,61 @@ void SDFMap::odomCallback(const nav_msgs::msg::Odometry::ConstSharedPtr &odom)
 
 
 
-void SDFMap::UpdateGMCallbackUpdate(const sensor_msgs::msg::PointCloud2::SharedPtr msg)
+
+
+void SDFMap::updateGobalMapOnlineCallback(const sensor_msgs::msg::PointCloud2::SharedPtr msg)
 {
-    // pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>());
-    // pcl::fromROSMsg(*msg, *cloud);
+    if (!md_.has_odom_ || !is_inited_) {
+        return;
+    }
 
-    // for (auto &pt : cloud->points)
-    // {
-    //     // world2map 投影到Global_Map坐标系
-    //     Eigen::Vector2d pos(pt.x, pt.y);
-    //     Eigen::Vector2i voxel_idx = world2map(pos, md_.Global_Maps[1]);
-    //     if (!isValid(voxel_idx, md_.Global_Maps[0]))
-    //         continue;
 
-    //     // 更新占用 buffer
-    //     md_.Global_Maps[0].occupancy_buffer_inflate_Global_Map[
-    //         voxel_idx(0) * md_.Global_Maps[0].map_voxel_num_(1) + voxel_idx(1)] = 1;
+    auto cloud_msg = std::make_unique<sensor_msgs::msg::PointCloud2>(*msg);
+    try {
+        *cloud_msg = tf2_buffer_->transform(*cloud_msg, "map", tf2::durationFromSec(0.1));
+    } catch (const tf2::ExtrapolationException &ex) {
+        RCLCPP_INFO(node_->get_logger(), "Transform cloud to map failed: %s", ex.what());
+        return;
+    }
 
-    //     // 可选：膨胀邻域 N x N 更新
-    //     // inflateNeighbors(voxel_idx, N);
-    // }
-	// //std::cout << "Global Map Update Finished!" << std::endl;
+ 
+    std::fill(md_.Global_Map_online.occupancy_buffer_inflate_Global_Map.begin(),
+              md_.Global_Map_online.occupancy_buffer_inflate_Global_Map.end(), 0);
+
+
+    sensor_msgs::PointCloud2ConstIterator<float> iter_x(*cloud_msg, "x");
+    sensor_msgs::PointCloud2ConstIterator<float> iter_y(*cloud_msg, "y");
+    sensor_msgs::PointCloud2ConstIterator<float> iter_z(*cloud_msg, "z");
+    sensor_msgs::PointCloud2ConstIterator<float> iter_i(*cloud_msg, "intensity");
+
+    for (; iter_x != iter_x.end(); ++iter_x, ++iter_y, ++iter_z, ++iter_i) {
+        float ix = *iter_x, iy = *iter_y, iz = *iter_z, intensity = *iter_i;
+
+        if (intensity < gobalmap_min_obstacle_intensity_ || intensity > gobalmap_max_obstacle_intensity_ ||
+            iz - md_.laser_z_ < -0.2 || iz - md_.laser_z_ > gobalmap_max_obstacle_height_) {
+            continue;
+        }
+
+        Eigen::Vector2d pt_2d(ix, iy);
+
+    
+        if ((pt_2d - md_.laser_pos_).norm() < gobalmap_blind_distance_) {
+            continue;
+        }
+
+     
+        if (!isValid(world2map(pt_2d, md_.Global_Map_online), md_.Global_Map_online)) {
+            continue;
+        }
+
+       
+        Eigen::Vector2i idx = world2map(pt_2d, md_.Global_Map_online);
+        int buffer_idx = idx(0) * md_.Global_Map_online.map_voxel_num_(1) + idx(1);
+        md_.Global_Map_online.occupancy_buffer_inflate_Global_Map[buffer_idx] = 1;
+    }
+
+    md_.use_global_map_online = true;
+  
 }
 
 void SDFMap::laserCallback(const sensor_msgs::msg::LaserScan::ConstSharedPtr &laser_msg)
@@ -496,7 +392,7 @@ void SDFMap::laserCallback(const sensor_msgs::msg::LaserScan::ConstSharedPtr &la
 	auto cloud_msg = std::make_unique<sensor_msgs::msg::PointCloud2>();
 	projectoir_.projectLaser(*laser_msg, *cloud_msg);
 
-	// 将点云变换到 map 坐标系
+
 	try
 	{
 		*cloud_msg = tf2_buffer_->transform(*cloud_msg, "map", tf2::durationFromSec(0.1));
@@ -507,7 +403,7 @@ void SDFMap::laserCallback(const sensor_msgs::msg::LaserScan::ConstSharedPtr &la
 		return;
 	}
 
-	// 获取传感器在 map 坐标系下的位置
+
 	geometry_msgs::msg::TransformStamped tf_odom_to_map;
 	try
 	{
@@ -534,7 +430,7 @@ void SDFMap::laserCallback(const sensor_msgs::msg::LaserScan::ConstSharedPtr &la
 	tf2::Vector3 laser_in_map_tf = tf * tf2::Vector3(md_.laser_pos_(0), md_.laser_pos_(1), 0.0);
 	Eigen::Vector2d laser_pos_in_map(laser_in_map_tf.x(), laser_in_map_tf.y());
 
-	// 保存更新后的激光位置
+
 	md_.laser_pos_ = laser_pos_in_map;
 
 	pcl::PointCloud<pcl::PointXY> latest_laser;
@@ -547,7 +443,6 @@ void SDFMap::laserCallback(const sensor_msgs::msg::LaserScan::ConstSharedPtr &la
 	if (std::isnan(laser_pos_in_map(0)) || std::isnan(laser_pos_in_map(1)))
 		return;
 
-	// 重置 buffer
 	resetBuffer(laser_pos_in_map - mp_.local_update_range_,
 				laser_pos_in_map + mp_.local_update_range_);
 
@@ -595,13 +490,11 @@ void SDFMap::laserCallback(const sensor_msgs::msg::LaserScan::ConstSharedPtr &la
 		}
 	}
 
-	// 同样将当前 laser 位置考虑进最小最大范围
 	min_x = std::min(min_x, laser_pos_in_map(0));
 	min_y = std::min(min_y, laser_pos_in_map(1));
 	max_x = std::max(max_x, laser_pos_in_map(0));
 	max_y = std::max(max_y, laser_pos_in_map(1));
 
-	// 更新 ESDF 需要更新的边界（使用 map 坐标系下的位置）
 	posToIndex(laser_pos_in_map - mp_.local_update_range_, md_.local_bound_min_);
 	posToIndex(laser_pos_in_map + mp_.local_update_range_, md_.local_bound_max_);
 
@@ -611,123 +504,6 @@ void SDFMap::laserCallback(const sensor_msgs::msg::LaserScan::ConstSharedPtr &la
 	md_.esdf_need_update_ = true;
 	md_.update_num_ += 1;
 }
-// void SDFMap::cloudCallback(const sensor_msgs::msg::PointCloud2::ConstSharedPtr &cloud_msg_in)
-// {
-//     if (!md_.has_odom_) {
-//         return;
-//     }
-
-//     // 复制并变换到 map 坐标系
-//     auto cloud_msg = std::make_unique<sensor_msgs::msg::PointCloud2>(*cloud_msg_in);
-//     try {
-//         *cloud_msg = tf2_buffer_->transform(*cloud_msg, "map", tf2::durationFromSec(0.1));
-//     } catch (const tf2::ExtrapolationException &ex) {
-//         RCLCPP_ERROR(node_->get_logger(),
-//                      "Error while transforming cloud to map: %s", ex.what());
-//         return;
-//     }
-
-//     // 计算传感器在 map 下的位置
-//     geometry_msgs::msg::TransformStamped tf_odom_to_map;
-//     try {
-//         tf_odom_to_map = tf2_buffer_->lookupTransform(
-//             "map", "gimbal_yaw", cloud_msg->header.stamp);
-//     } catch (const tf2::TransformException &ex) {
-//         RCLCPP_WARN(node_->get_logger(),
-//                     "Could not transform odom to map: %s", ex.what());
-//         return;
-//     }
-//     tf2::Transform tf;
-//     tf.setOrigin(tf2::Vector3(
-//         tf_odom_to_map.transform.translation.x,
-//         tf_odom_to_map.transform.translation.y,
-//         tf_odom_to_map.transform.translation.z));
-//     tf2::Quaternion q(
-//         tf_odom_to_map.transform.rotation.x,
-//         tf_odom_to_map.transform.rotation.y,
-//         tf_odom_to_map.transform.rotation.z,
-//         tf_odom_to_map.transform.rotation.w);
-//     tf.setRotation(q);
-//     tf2::Vector3 laser_tf = tf * tf2::Vector3(md_.laser_pos_(0), md_.laser_pos_(1), 0.0);
-//     Eigen::Vector2d laser_pos_in_map(laser_tf.x(), laser_tf.y());
-//     md_.laser_pos_ = laser_pos_in_map;
-
-//     // 准备迭代器读取点云 XYZ 和 intensity
-//     sensor_msgs::PointCloud2ConstIterator<float> iter_x(*cloud_msg, "x");
-//     sensor_msgs::PointCloud2ConstIterator<float> iter_y(*cloud_msg, "y");
-// 	sensor_msgs::PointCloud2ConstIterator<float> iter_z(*cloud_msg, "z");
-//     sensor_msgs::PointCloud2ConstIterator<float> iter_i(*cloud_msg, "intensity");
-
-//     // 如果没有有效点或位置非法，直接返回
-//     if (std::isnan(laser_pos_in_map(0)) || std::isnan(laser_pos_in_map(1))) {
-// 		return;
-// 	}
-	
-
-//     // 重置本地 ESDF 更新缓存
-//     resetBuffer(laser_pos_in_map - mp_.local_update_range_,
-//                 laser_pos_in_map + mp_.local_update_range_);
-
-//     int inf_step = static_cast<int>(std::ceil(mp_.obstacles_inflation_ / mp_.resolution_));
-//     double max_x = mp_.map_min_boundary_(0), max_y = mp_.map_min_boundary_(1);
-//     double min_x = mp_.map_max_boundary_(0), min_y = mp_.map_max_boundary_(1);
-
-//     // 遍历所有点
-//     for (; iter_x != iter_x.end(); ++iter_x, ++iter_y, ++iter_i) {
-//         float ix = *iter_x, iy = *iter_y, iz=*iter_z,intensity = *iter_i;
-
-//         // 1) 强度过滤
-//         if (intensity < min_obstacle_intensity_ || intensity > max_obstacle_intensity_ || iz < min_obstacle_height_ || iz > max_obstacle_height_) {
-//             continue;
-//         }
-
-//         // 2) 离传感器太近也跳过
-//         Eigen::Vector2d p2d(ix, iy);
-//         if ((p2d - laser_pos_in_map).norm() < 0.2) {
-//             continue;
-//         }
-//         // 3) 仅更新本地范围内的点
-//         if (std::abs(ix - laser_pos_in_map(0)) > mp_.local_update_range_(0) ||
-//             std::abs(iy - laser_pos_in_map(1)) > mp_.local_update_range_(1)) {
-//             continue;
-//         }
-
-//         // 膨胀并写入 buffer
-//         for (int dx = -inf_step; dx <= inf_step; ++dx) {
-//             for (int dy = -inf_step; dy <= inf_step; ++dy) {
-//                 Eigen::Vector2d p2d_inf(
-//                     ix + dx * mp_.resolution_,
-//                     iy + dy * mp_.resolution_);
-//                 max_x = std::max(max_x, p2d_inf(0));
-//                 max_y = std::max(max_y, p2d_inf(1));
-//                 min_x = std::min(min_x, p2d_inf(0));
-//                 min_y = std::min(min_y, p2d_inf(1));
-
-//                 Eigen::Vector2i idx2d;
-//                 posToIndex(p2d_inf, idx2d);
-//                 if (!isInMap(idx2d)) {
-//                     continue;
-//                 }
-//                 md_.occupancy_buffer_inflate_[toAddress(idx2d)] = 1;
-//             }
-//         }
-//     }
-
-//     // 包含传感器自身位置到边界
-//     min_x = std::min(min_x, laser_pos_in_map(0));
-//     min_y = std::min(min_y, laser_pos_in_map(1));
-//     max_x = std::max(max_x, laser_pos_in_map(0));
-//     max_y = std::max(max_y, laser_pos_in_map(1));
-
-//     // 更新 ESDF 索引边界
-//     posToIndex(laser_pos_in_map - mp_.local_update_range_, md_.local_bound_min_);
-//     posToIndex(laser_pos_in_map + mp_.local_update_range_, md_.local_bound_max_);
-//     boundIndex(md_.local_bound_min_);
-//     boundIndex(md_.local_bound_max_);
-
-//     md_.esdf_need_update_ = true;
-//     md_.update_num_ += 1;
-// }
 
 void SDFMap::cloudCallback(const sensor_msgs::msg::PointCloud2::ConstSharedPtr &cloud_msg_in)
 {
@@ -761,27 +537,24 @@ void SDFMap::cloudCallback(const sensor_msgs::msg::PointCloud2::ConstSharedPtr &
 
     for (; iter_x != iter_x.end(); ++iter_x, ++iter_y, ++iter_z, ++iter_i) {
         float ix = *iter_x, iy = *iter_y, iz = *iter_z, intensity = *iter_i;
-		
-        // 强度 & 高度过滤
-        if (intensity < min_obstacle_intensity_ || intensity > max_obstacle_intensity_ ||
-            iz - md_.laser_z_ < min_obstacle_height_ || iz - md_.laser_z_ > max_obstacle_height_) {
+	
+        if (intensity < localmap_min_obstacle_intensity_ || intensity > localmap_max_obstacle_intensity_ ||
+            iz - md_.laser_z_ < localmap_min_obstacle_height_ || iz - md_.laser_z_ > localmap_max_obstacle_height_) {
 			
             continue;
         }
 
-        // 离 gimbal_yaw 太近跳过
+
         Eigen::Vector2d p2d(ix, iy);
-        if ((p2d - md_.laser_pos_).norm() < 0.2) {
+        if ((p2d - md_.laser_pos_).norm() < localmap_blind_distance_) {
             continue;
         }
 
-        // 更新范围判断（以 gimbal_yaw 为中心）
         if (std::abs(ix - md_.laser_pos_(0)) > mp_.local_update_range_(0) ||
             std::abs(iy - md_.laser_pos_(1)) > mp_.local_update_range_(1)) {
             continue;
         }
 
-        // 膨胀障碍物写入 buffer
         for (int dx = -inf_step; dx <= inf_step; ++dx) {
             for (int dy = -inf_step; dy <= inf_step; ++dy) {
                 Eigen::Vector2d p2d_inf(
@@ -803,13 +576,13 @@ void SDFMap::cloudCallback(const sensor_msgs::msg::PointCloud2::ConstSharedPtr &
         }
     }
 
-    // 5. 边界包含更新中心
+
     min_x = std::min(min_x, md_.laser_pos_(0));
     min_y = std::min(min_y, md_.laser_pos_(1));
     max_x = std::max(max_x, md_.laser_pos_(0));
     max_y = std::max(max_y, md_.laser_pos_(1));
 
-    // 6. 更新 ESDF 索引边界
+
     posToIndex(md_.laser_pos_ - mp_.local_update_range_, md_.local_bound_min_);
     posToIndex(md_.laser_pos_ + mp_.local_update_range_, md_.local_bound_max_);
     boundIndex(md_.local_bound_min_);
@@ -821,102 +594,7 @@ void SDFMap::cloudCallback(const sensor_msgs::msg::PointCloud2::ConstSharedPtr &
 }
 
 
-// void SDFMap::laserCallback(const sensor_msgs::msg::LaserScan::ConstSharedPtr &laser_msg)
-// {
-// 	if (!md_.has_odom_)
-// 	{
-// 		return;
-// 	}
-// 	auto cloud_msg = std::make_unique<sensor_msgs::msg::PointCloud2>();
 
-// 	projectoir_.projectLaser(*laser_msg, *cloud_msg);
-// 	try
-// 	{
-// 		*cloud_msg = tf2_buffer_->transform(*cloud_msg, "map", tf2::durationFromSec(0.1));
-// 	}
-// 	catch (const tf2::ExtrapolationException &ex)
-// 	{
-// 		RCLCPP_ERROR(node_->get_logger(), "Error while transforming %s", ex.what());
-// 		return;
-// 	}
-// 	pcl::PointCloud<pcl::PointXY>
-// 		latest_laser;
-
-// 	pcl::fromROSMsg(*cloud_msg, latest_laser);
-// 	md_.has_cloud_ = true;
-// 	if (latest_laser.points.size() == 0)
-// 		return;
-
-// 	if (isnan(md_.laser_pos_(0)) || isnan(md_.laser_pos_(1)))
-// 		return;
-
-// 	this->resetBuffer(md_.laser_pos_ - mp_.local_update_range_,
-// 					  md_.laser_pos_ + mp_.local_update_range_);
-
-// 	pcl::PointXY pt;
-// 	Eigen::Vector2d p2d, p2d_inf;
-
-// 	int inf_step = ceil(mp_.obstacles_inflation_ / mp_.resolution_);
-
-// 	double max_x, max_y, min_x, min_y;
-
-// 	min_x = mp_.map_max_boundary_(0);
-// 	min_y = mp_.map_max_boundary_(1);
-
-// 	max_x = mp_.map_min_boundary_(0);
-// 	max_y = mp_.map_min_boundary_(1);
-// 	for (size_t i = 0; i < latest_laser.points.size(); ++i)
-// 	{
-// 		pt = latest_laser.points[i];
-// 		p2d(0) = pt.x, p2d(1) = pt.y;
-// 		// p2d = R2d * p2d;
-
-// 		Eigen::Vector2d devi = p2d - md_.laser_pos_;
-// 		Eigen::Vector2i inf_pt;
-// 		if (devi.norm() < 0.2)
-// 			continue;
-// 		if (fabs(devi(0)) < mp_.local_update_range_(0) && fabs(devi(1)) < mp_.local_update_range_(1))
-// 		{
-// 			for (int x = -inf_step; x <= inf_step; ++x)
-// 				for (int y = -inf_step; y <= inf_step; ++y)
-// 				{
-
-// 					p2d_inf(0) = pt.x + x * mp_.resolution_;
-// 					p2d_inf(1) = pt.y + y * mp_.resolution_;
-
-// 					max_x = max(max_x, p2d_inf(0));
-// 					max_y = max(max_y, p2d_inf(1));
-
-// 					min_x = min(min_x, p2d_inf(0));
-// 					min_y = min(min_y, p2d_inf(1));
-
-// 					posToIndex(p2d_inf, inf_pt);
-
-// 					if (!isInMap(inf_pt))
-// 						continue;
-
-// 					int idx_inf = toAddress(inf_pt);
-
-// 					md_.occupancy_buffer_inflate_[idx_inf] = 1;
-// 				}
-// 		}
-// 	}
-// 	min_x = min(min_x, md_.laser_pos_(0));
-// 	min_y = min(min_y, md_.laser_pos_(1));
-
-// 	max_x = max(max_x, md_.laser_pos_(0));
-// 	max_y = max(max_y, md_.laser_pos_(1));
-
-// 	posToIndex(md_.laser_pos_ - mp_.local_update_range_, md_.local_bound_min_);
-// 	posToIndex(md_.laser_pos_ + mp_.local_update_range_, md_.local_bound_max_);
-
-
-// 	boundIndex(md_.local_bound_min_);
-// 	boundIndex(md_.local_bound_max_);
-
-// 	md_.esdf_need_update_ = true;
-// 	md_.update_num_ += 1;
-// }
 void SDFMap::updateESDFCallback()
 {
 	if (!md_.esdf_need_update_)

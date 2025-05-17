@@ -42,7 +42,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /usr/local/bin/cmake --regenerate-during-build -S/home/hy/ACE/src/Kinodynamic_esdf_mpc/plan_env -B/home/hy/ACE/src/Kinodynamic_esdf_mpc/plan_env/build
+  command = /usr/local/bin/cmake --regenerate-during-build -S/home/hy/wust_planner/src/plan_env -B/home/hy/wust_planner/src/plan_env/build
   description = Re-running CMake...
   generator = 1
 

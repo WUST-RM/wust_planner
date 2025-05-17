@@ -74,6 +74,7 @@ struct MappingData
   bool has_odom_, has_cloud_;
   std::vector<char> occupancy_buffer_inflate_;
   std::vector<Global_Map> Global_Maps;
+  Global_Map Global_Map_online;
   std::vector<char> occupancy_buffer_neg;
   std::vector<double> distance_buffer_neg_;
   std::vector<double> distance_buffer_all_;
@@ -86,12 +87,22 @@ struct MappingData
   double fuse_time_, esdf_time_, max_fuse_time_, max_esdf_time_;
   int update_num_;
   bool use_global_map = false;
+  bool use_global_map_online = false;
   int global_map_num = 0;
   int current_global_map = 0;
+  // inline int is_occupancy(int idx)
+  // {
+  //   return occupancy_buffer_inflate_[idx] || (use_global_map ? Global_Maps[current_global_map].occupancy_buffer_inflate_Global_Map[idx] : 0);
+  // }
   inline int is_occupancy(int idx)
   {
-    return occupancy_buffer_inflate_[idx] || (use_global_map ? Global_Maps[current_global_map].occupancy_buffer_inflate_Global_Map[idx] : 0);
+      return occupancy_buffer_inflate_[idx] 
+          || 
+          (use_global_map ? Global_Maps[current_global_map].occupancy_buffer_inflate_Global_Map[idx] : 0)
+          || 
+          (use_global_map_online ? Global_Map_online.occupancy_buffer_inflate_Global_Map[idx] : 0);
   }
+
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 };
 
@@ -156,12 +167,16 @@ private:
   laser_geometry::LaserProjection projectoir_;
   // shared_ptr<message_filters::Subscriber<sensor_msgs::msg::LaserScan>> laser_sub_;
   rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odom_sub_;
-  rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr gmpcl_sub_;
+  rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr gobalmap_online_sub_;
 
   rclcpp::TimerBase::SharedPtr esdf_timer_, vis_timer_;
   rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr map_pub_, esdf_pub_;
-  double min_obstacle_intensity_,max_obstacle_intensity_;
-  double min_obstacle_height_,max_obstacle_height_;
+  double localmap_min_obstacle_intensity_,localmap_max_obstacle_intensity_;
+  double localmap_min_obstacle_height_,localmap_max_obstacle_height_;
+  double localmap_blind_distance_;
+  double gobalmap_min_obstacle_intensity_,gobalmap_max_obstacle_intensity_;
+  double gobalmap_min_obstacle_height_,gobalmap_max_obstacle_height_;
+  double gobalmap_blind_distance_;
   geometry_msgs::msg::TransformStamped last_tf_gimbal_to_map_;
   bool has_last_tf_ = false;
   void odomCallback(const nav_msgs::msg::Odometry::ConstSharedPtr &odom);
@@ -174,7 +189,7 @@ private:
   void visCallback();
 
   void updateESDFCallback();
-  void UpdateGMCallbackUpdate(const sensor_msgs::msg::PointCloud2::SharedPtr msg);
+  void updateGobalMapOnlineCallback(const sensor_msgs::msg::PointCloud2::SharedPtr msg);
   void updateESDF2d();
 
   void resetBuffer(Eigen::Vector2d min_pos, Eigen::Vector2d max_pos);
@@ -270,4 +285,9 @@ inline bool SDFMap::isValid(const Eigen::Vector2i &idx, const Global_Map &gm)
     return (idx(0) >= 0 && idx(0) < gm.map_voxel_num_(0) &&
             idx(1) >= 0 && idx(1) < gm.map_voxel_num_(1));
 }
+inline int getMapIndex(const Eigen::Vector2i& idx, const Global_Map& map)
+{
+    return idx(0) * map.map_voxel_num_(1) + idx(1);
+}
+
 #endif
