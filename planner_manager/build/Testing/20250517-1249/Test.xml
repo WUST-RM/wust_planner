@@ -21,14 +21,46 @@
 	TotalVirtualMemory="0"
 	TotalPhysicalMemory="31874"
 	LogicalProcessorsPerPhysical="1"
-	ProcessorClockFrequency="2600"
+	ProcessorClockFrequency="2600.06"
 	>
 	<Testing>
-		<StartDateTime>May 17 20:50 CST</StartDateTime>
-		<StartTestTime>1747486225</StartTestTime>
-		<TestList/>
-		<EndDateTime>May 17 20:50 CST</EndDateTime>
-		<EndTestTime>1747486225</EndTestTime>
+		<StartDateTime>May 17 21:24 CST</StartDateTime>
+		<StartTestTime>1747488245</StartTestTime>
+		<TestList>
+			<Test>./xmllint</Test>
+		</TestList>
+		<Test Status="passed">
+			<Name>xmllint</Name>
+			<Path>.</Path>
+			<FullName>./xmllint</FullName>
+			<FullCommandLine>/usr/bin/python3 "-u" "/opt/ros/humble/share/ament_cmake_test/cmake/run_test.py" "/home/hy/wust_planner/src/planner_manager/build/test_results/planner_manager/xmllint.xunit.xml" "--package-name" "planner_manager" "--output-file" "/home/hy/wust_planner/src/planner_manager/build/ament_xmllint/xmllint.txt" "--command" "/opt/ros/humble/bin/ament_xmllint" "--xunit-file" "/home/hy/wust_planner/src/planner_manager/build/test_results/planner_manager/xmllint.xunit.xml"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>1.51892</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "-u" "/opt/ros/humble/share/ament_cmake_test/cmake/run_test.py" "/home/hy/wust_planner/src/planner_manager/build/test_results/planner_manager/xmllint.xunit.xml" "--package-name" "planner_manager" "--output-file" "/home/hy/wust_planner/src/planner_manager/build/ament_xmllint/xmllint.txt" "--command" "/opt/ros/humble/bin/ament_xmllint" "--xunit-file" "/home/hy/wust_planner/src/planner_manager/build/test_results/planner_manager/xmllint.xunit.xml"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJylk01vwyAMhu/5Fb7lRN1Gq7r1B+y40+4RJU6DAgbx0Y9/P9JW2rRKVdXcjG0ev8CLEBAyt4liWvjzFjQf3Kh5D70zxh2nSDlrJXelBDUOzhIOZzzmmFpvJDMFjEHhLW5Lq9xTqLcVCEDnEwYXcch2Zwh3mlFa4tSerDGaEwhxyqyT6LUheJqOu6xNh5PqNlDMJsW7ltuExYW/KKvqc5pRe6nG0jBlatARDtLorroVr9zvwi0nx2bZrJfr1UasmrePS/bRrodqlPdqIDX+ynkJ0xs50vtMyHQtrbKFNBPkyTfrzUxIZhXKc+v+PBN09+B/KV8OfHDFgzYWa2fuKvHP+YFSDlzc3hEs76oHCkUhXGfDxa3Pf4aX7FpXP8sYUgA=</Value>
+				</Measurement>
+			</Results>
+			<Labels>
+				<Label>linter</Label>
+				<Label>xmllint</Label>
+			</Labels>
+		</Test>
+		<EndDateTime>May 17 21:24 CST</EndDateTime>
+		<EndTestTime>1747488246</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>

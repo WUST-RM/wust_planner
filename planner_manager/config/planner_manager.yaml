@@ -19,6 +19,8 @@
       Car_L : 0.2
       Car_W : 0.3
       safe_check_distance : 5.0
+      predict_collision_sample_step : 2
+      predict_collision_danger_limit : 3
     sdf_map:
       use_global_map: true
       #没全局地图时使用
@@ -31,20 +33,26 @@
       global_map_num: 1
       global_map_path:
       
-       #- "/home/hy/ACE/src/Kinodynamic_esdf_mpc/planner_manager/map/rmuc_2025.yaml"
-       #- "/home/hy/ACE/src/Kinodynamic_esdf_mpc/planner_manager/map/RMUC2025.yaml"
-        # - "/home/z/Ouuu_fast_planner_2D/src/planner_manager/map/RMUC1.yaml"
-      
-       - "/home/hy/ACE/src/Kinodynamic_esdf_mpc/planner_manager/map/rmuc_2025a.yaml"
-       
+       #- "/home/hy/wust_planner/src/planner_manager/map/rmuc_2025.yaml"
+       #- "/home/hy/wust_planner/src/planner_manager/map/RMUC2025.yaml"
 
-      #laser_topic: obstacle_scana
-      pointcloud_topic: /terrain_map_ext
-      min_obstacle_intensity: 0.2
-      max_obstacle_intensity: 2.0
-      min_obstacle_height: 0.1
-      max_obstacle_height: 0.4
-      gmpcl: terrain_map_ext
+      
+       - "/home/hy/wust_planner/src/planner_manager/map/rmuc_2025a.yaml"
+      localmap:
+        pointcloud_topic: terrain_map
+        blind_distance: 0.2
+        min_obstacle_intensity: 0.2
+        max_obstacle_intensity: 2.0
+        min_obstacle_height: 0.1
+        max_obstacle_height: 0.4
+      gobalmap_online:
+        pointcloud_topic: terrain_map_ext
+        blind_distance: 5.0
+        min_obstacle_intensity: 0.1
+        max_obstacle_intensity: 2.0
+        min_obstacle_height: -0.5
+        max_obstacle_height: 2.5
+      
       show_esdf_time: false
       local_update_range_x: 5.0
       local_update_range_y: 5.0
@@ -69,14 +77,14 @@
       max_vel: 2.5
       max_acc: 0.8
       dist0: 0.6
-      lambda1: 20.0
-      lambda2: 8.0
-      lambda3: 0.00001
-      lambda4: 0.05
-      lambda5: -1.0
-      lambda6: -1.0
-      lambda7: 100.0
-      lambda8: -1.0
+      jerk_smoothness_weight: 10.0
+      distance_weight: 10.0
+      feasibility_weight: 0.00001
+      end_point_weight: 0.05
+      guide_cost_weight: -1.0
+      visibility_cost_weight: -1.0
+      waypoints_cost_weight: 100.0
+      acc_smoothness: -1.0
       max_iteration_num1: 2
       max_iteration_num2: 300
       max_iteration_num3: 200
@@ -85,8 +93,8 @@
       max_iteration_time2: 0.005
       max_iteration_time3: 0.003
       max_iteration_time4: 0.003
-      algorithm1: 11
-      algorithm2: 15
+      quadratic_cost: 11
+      general_cost: 15
       order: 3
     
     mpc:

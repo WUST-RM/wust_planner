@@ -111,6 +111,8 @@ namespace fast_planner
             double l = this->declare_parameter<double>("manager.Car_L", 0.5);
             double w = this->declare_parameter<double>("manager.Car_W", 0.45);
             safe_check_distance = this->declare_parameter<double>("manager.safe_check_distance", 3.0);
+            predict_collision_danger_limit_=  this->declare_parameter<int>("manager.predict_collision_danger_limit", 5);
+            predict_collision_sample_step_=  this->declare_parameter<int>("manager.predict_collision_sample_step", 2);
             Car_radius = l;
             double half_l = l / 2.0;
             double half_w = w / 2.0;
@@ -149,11 +151,10 @@ namespace fast_planner
             visited_pub.reset();
             predict_path_pub.reset();
             cmd_vel_pub.reset();
-           // cmd_Gimbal_pub.reset();
+ 
           
             RCLCPP_INFO(this->get_logger(), "kino_replan_fsm destructed");
 
-            // 4. 其余 RCLCPP 发布者/订阅者会随 Node 基类析构自动清理，无需显式处理
         }
 
         std::vector<Eigen::Vector2d> local_points;
@@ -196,210 +197,70 @@ namespace fast_planner
             bspline_process(10086);
         }
     
-//         void initialPoseCallback(const nav_msgs::msg::Odometry::SharedPtr msg)
-// {
 
-//     geometry_msgs::msg::TransformStamped tf_map_odom;
-//     try {
-//         tf_map_odom = tf_buffer_->lookupTransform("map", "odom", tf2::TimePointZero);
-//     } catch (const tf2::TransformException &ex) {
-//         RCLCPP_ERROR(get_logger(), "fail to lookup map→odom: %s", ex.what());
-//         init_initialPose = false;
-//         return;
-//     }
+        void initialPoseCallback(const nav_msgs::msg::Odometry::SharedPtr msg)
+            {   if(!is_inited) return;
+            // 1. map→odom
+            geometry_msgs::msg::TransformStamped tf_map_odom;
+            try {
+                tf_map_odom = tf_buffer_->lookupTransform(
+                "map", "odom", tf2::TimePointZero);
+            } catch (const tf2::TransformException &ex) {
+                RCLCPP_INFO(get_logger(), "fail to lookup map→odom: %s", ex.what());
+                init_initialPose = false;
+                return;
+            }
+            tf2::Transform t_map_odom;
+            tf2::fromMsg(tf_map_odom.transform, t_map_odom);
+            double roll_m, pitch_m, yaw_m;
+            tf2::Matrix3x3(t_map_odom.getRotation()).getRPY(roll_m, pitch_m, yaw_m);
 
-//     geometry_msgs::msg::TransformStamped tf_odom_gimbal;
-//     try {
-//         tf_odom_gimbal = tf_buffer_->lookupTransform("odom", "gimbal_yaw", tf2::TimePointZero);
-//     } catch (const tf2::TransformException &ex) {
-//         RCLCPP_ERROR(get_logger(), "fail to lookup odom→gimbal_yaw_fake: %s", ex.what());
-//         init_initialPose = false;
-//         return;
-//     }
-
-
-//     Eigen::Affine3f T_map_odom = Eigen::Affine3f::Identity();
-//     Eigen::Vector3f t_map_odom(tf_map_odom.transform.translation.x,
-//                                tf_map_odom.transform.translation.y,
-//                                tf_map_odom.transform.translation.z);
-//     Eigen::Quaternionf q_map_odom(tf_map_odom.transform.rotation.w,
-//                                   tf_map_odom.transform.rotation.x,
-//                                   tf_map_odom.transform.rotation.y,
-//                                   tf_map_odom.transform.rotation.z);
-//     T_map_odom.translate(t_map_odom);
-//     T_map_odom.rotate(q_map_odom);
-
-//     Eigen::Affine3f T_odom_gimbal = Eigen::Affine3f::Identity();
-//     Eigen::Vector3f t_odom_gimbal(tf_odom_gimbal.transform.translation.x,
-//                                   tf_odom_gimbal.transform.translation.y,
-//                                   tf_odom_gimbal.transform.translation.z);
-//     Eigen::Quaternionf q_odom_gimbal(tf_odom_gimbal.transform.rotation.w,
-//                                      tf_odom_gimbal.transform.rotation.x,
-//                                      tf_odom_gimbal.transform.rotation.y,
-//                                      tf_odom_gimbal.transform.rotation.z);
-//     T_odom_gimbal.translate(t_odom_gimbal);
-//     T_odom_gimbal.rotate(q_odom_gimbal);
-
-//     Eigen::Affine3f T_map_gimbal = T_map_odom * T_odom_gimbal;
+            // 2. odom→gimbal_yaw
+            geometry_msgs::msg::TransformStamped tf_odom_gimbal;
+            try {
+                tf_odom_gimbal = tf_buffer_->lookupTransform(
+                "odom", base_frame_, tf2::TimePointZero);
+            } catch (const tf2::TransformException &ex) {
+                RCLCPP_INFO(get_logger(), "fail to lookup odom→%s: %s", base_frame_.c_str(), ex.what());
+                init_initialPose = false;
+                return;
+            }
+            tf2::Transform t_odom_gimbal;
+            tf2::fromMsg(tf_odom_gimbal.transform, t_odom_gimbal);
+            double roll_g, pitch_g, yaw_g;
+            tf2::Matrix3x3(t_odom_gimbal.getRotation()).getRPY(roll_g, pitch_g, yaw_g);
 
 
-//     Eigen::Vector3f pos_map = T_map_gimbal.translation();
-//     init_pose(0) = pos_map.x();
-//     init_pose(1) = pos_map.y();
+            tf2::Transform t_map_gimbal = t_map_odom * t_odom_gimbal;
+            tf2::Vector3 pos = t_map_gimbal.getOrigin();
+            init_pose(0) = pos.x();
+            init_pose(1) = pos.y();
+            double roll, pitch, yaw;
+            tf2::Matrix3x3(t_map_gimbal.getRotation()).getRPY(roll, pitch, yaw);
+            start_yaw_(0) = static_cast<float>(yaw);
+            tf2::Quaternion t_q = {
+                msg->pose.pose.orientation.x,
+                msg->pose.pose.orientation.y,
+                msg->pose.pose.orientation.z,
+                msg->pose.pose.orientation.w};
+                double roll_o, pitch_o, yaw_o;
+                tf2::Matrix3x3(t_q).getRPY(roll_o, pitch_o, yaw_o);
 
-//     Eigen::Matrix3f rot_map = T_map_gimbal.rotation();
-//     float yaw_map = std::atan2(rot_map(1, 0), rot_map(0, 0));
-//     start_yaw_(0) = yaw_map;
+            // 保存各自的 RPY 到成员变量
+            odom_rpy << roll_g, pitch_g, yaw_g;    
+            gimbal_rpy << roll_g, pitch_g, yaw_g;  
 
+            // 里程计速度、偏航角速度
+            start_yaw_(1) = msg->twist.twist.angular.z;
+            odom_vel_(0)  = msg->twist.twist.linear.x;
+            odom_vel_(1)  = msg->twist.twist.linear.y;
 
-//     start_yaw_(1) = msg->twist.twist.angular.z;
-//     odom_vel_(0)  = msg->twist.twist.linear.x;
-//     odom_vel_(1)  = msg->twist.twist.linear.y;
-
-//     tf2::Quaternion q_gimbal(tf_odom_gimbal.transform.rotation.x,
-//                               tf_odom_gimbal.transform.rotation.y,
-//                               tf_odom_gimbal.transform.rotation.z,
-//                               tf_odom_gimbal.transform.rotation.w);
-//     double roll_g, pitch_g, yaw_g;
-//     tf2::Matrix3x3(q_gimbal).getRPY(roll_g, pitch_g, yaw_g);
-//     gimbal_rpy << roll_g, pitch_g, yaw_g;
-
-//     tf2::Quaternion q_map(tf_map_odom.transform.rotation.x,
-//                            tf_map_odom.transform.rotation.y,
-//                            tf_map_odom.transform.rotation.z,
-//                            tf_map_odom.transform.rotation.w);
-//     double roll_m, pitch_m, yaw_m;
-//     tf2::Matrix3x3(q_map).getRPY(roll_m, pitch_m, yaw_m);
-//     odom_rpy << roll_m, pitch_m, yaw_m;
-
-//     init_initialPose = true;
-
-
-// }
-void initialPoseCallback(const nav_msgs::msg::Odometry::SharedPtr msg)
-{   if(!is_inited) return;
-  // 1. map→odom
-  geometry_msgs::msg::TransformStamped tf_map_odom;
-  try {
-    tf_map_odom = tf_buffer_->lookupTransform(
-      "map", "odom", tf2::TimePointZero);
-  } catch (const tf2::TransformException &ex) {
-    RCLCPP_INFO(get_logger(), "fail to lookup map→odom: %s", ex.what());
-    init_initialPose = false;
-    return;
-  }
-  tf2::Transform t_map_odom;
-  tf2::fromMsg(tf_map_odom.transform, t_map_odom);
-  double roll_m, pitch_m, yaw_m;
-  tf2::Matrix3x3(t_map_odom.getRotation()).getRPY(roll_m, pitch_m, yaw_m);
-
-  // 2. odom→gimbal_yaw
-  geometry_msgs::msg::TransformStamped tf_odom_gimbal;
-  try {
-    tf_odom_gimbal = tf_buffer_->lookupTransform(
-      "odom", base_frame_, tf2::TimePointZero);
-  } catch (const tf2::TransformException &ex) {
-    RCLCPP_INFO(get_logger(), "fail to lookup odom→%s: %s", base_frame_.c_str(), ex.what());
-    init_initialPose = false;
-    return;
-  }
-  tf2::Transform t_odom_gimbal;
-  tf2::fromMsg(tf_odom_gimbal.transform, t_odom_gimbal);
-  double roll_g, pitch_g, yaw_g;
-  tf2::Matrix3x3(t_odom_gimbal.getRotation()).getRPY(roll_g, pitch_g, yaw_g);
-
-  // —— 以下是你原来对 map→gimbal 的处理（可选） ——
-  tf2::Transform t_map_gimbal = t_map_odom * t_odom_gimbal;
-  tf2::Vector3 pos = t_map_gimbal.getOrigin();
-  init_pose(0) = pos.x();
-  init_pose(1) = pos.y();
-  double roll, pitch, yaw;
-  tf2::Matrix3x3(t_map_gimbal.getRotation()).getRPY(roll, pitch, yaw);
-  start_yaw_(0) = static_cast<float>(yaw);
-  tf2::Quaternion t_q = {
-    msg->pose.pose.orientation.x,
-    msg->pose.pose.orientation.y,
-    msg->pose.pose.orientation.z,
-    msg->pose.pose.orientation.w};
-    double roll_o, pitch_o, yaw_o;
-    tf2::Matrix3x3(t_q).getRPY(roll_o, pitch_o, yaw_o);
-
-  // 保存各自的 RPY 到成员变量
-   odom_rpy << roll_g, pitch_g, yaw_g;    
-   gimbal_rpy << roll_g, pitch_g, yaw_g;  
-
-  // 里程计速度、偏航角速度
-  start_yaw_(1) = msg->twist.twist.angular.z;
-  odom_vel_(0)  = msg->twist.twist.linear.x;
-  odom_vel_(1)  = msg->twist.twist.linear.y;
-
-  init_initialPose = true;
-}
+            init_initialPose = true;
+            }
 
         
         
-        // void initialPoseCallback(const nav_msgs::msg::Odometry::SharedPtr msg)
-        // {
-        //     geometry_msgs::msg::TransformStamped t;
-        //     try
-        //     {
-        //         // 获取 gimbal_yaw 相对于 odom 的变换（注意方向）
-        //         t = tf_buffer_->lookupTransform("gimbal_yaw", "odom", tf2::TimePointZero);
-        //     }
-        //     catch (const tf2::TransformException &ex)
-        //     {
-        //         RCLCPP_ERROR(this->get_logger(), "Could not transform odom to gimbal_yaw: %s", ex.what());
-        //         init_initialPose = false;
-        //         return;
-        //     }
-
-        //     // 提取旋转矩阵
-        //     tf2::Quaternion tf_q(
-        //         t.transform.rotation.x,
-        //         t.transform.rotation.y,
-        //         t.transform.rotation.z,
-        //         t.transform.rotation.w);
-        //     tf2::Matrix3x3 rot(tf_q); // R_gimbal^odom
-
-        //     // ====== 转换位置（直接从 tf 中得到）======
-        //     init_pose(0) = t.transform.translation.x;
-        //     init_pose(1) = t.transform.translation.y;
-
-        //     // ====== 转换角度 ======
-        //     double roll, pitch, yaw;
-        //     rot.getRPY(roll, pitch, yaw);
-        //     gimbal_rpy << roll, pitch, yaw;
-        //     start_yaw_(0) = yaw;
-
-        //     // ====== 转换角速度到 gimbal_yaw 坐标系 ======
-        //     tf2::Vector3 ang_vel_odom(
-        //         msg->twist.twist.angular.x,
-        //         msg->twist.twist.angular.y,
-        //         msg->twist.twist.angular.z);
-        //     tf2::Vector3 ang_vel_gimbal = rot * ang_vel_odom;
-        //     start_yaw_(1) = ang_vel_gimbal.z(); // 只用 yaw 方向角速度
-
-        //     // ====== 转换线速度到 gimbal_yaw 坐标系 ======
-        //     tf2::Vector3 lin_vel_odom(
-        //         msg->twist.twist.linear.x,
-        //         msg->twist.twist.linear.y,
-        //         msg->twist.twist.linear.z);
-        //     tf2::Vector3 lin_vel_gimbal = rot * lin_vel_odom;
-        //     odom_vel_(0) = lin_vel_gimbal.x();
-        //     odom_vel_(1) = lin_vel_gimbal.y();
-
-        //     // ====== 保存 odom 的原始 rpy（可选）======
-        //     tf2::Quaternion odom_q(
-        //         msg->pose.pose.orientation.x,
-        //         msg->pose.pose.orientation.y,
-        //         msg->pose.pose.orientation.z,
-        //         msg->pose.pose.orientation.w);
-        //     tf2::Matrix3x3(odom_q).getRPY(roll, pitch, yaw);
-        //     odom_rpy << roll, pitch, yaw;
-
-        //     init_initialPose = true;
-        // }
-
+    
 
         Eigen::Vector3d odom_rpy;
         Eigen::Vector3d gimbal_rpy;
@@ -499,9 +360,9 @@ void initialPoseCallback(const nav_msgs::msg::Odometry::SharedPtr msg)
             if (fsm_num == 100)
             {
                 if (!init_initialPose)
-                    cout << "no odom." << endl;
+                  // cout << "no odom." << endl;
                 if (!trigger_)
-                    cout << "wait for goal." << endl;
+                    //cout << "wait for goal." << endl;
                 fsm_num = 0;
             }
             switch (exec_state_)
@@ -641,131 +502,7 @@ void initialPoseCallback(const nav_msgs::msg::Odometry::SharedPtr msg)
                 exec_state_ = GEN_NEW_TRAJ;
             // std::cout << "exec_state_" <<  exec_state_ << std::endl;
         }
-        // void goalPoseCallback(
-        //     const geometry_msgs::msg::PoseStamped::SharedPtr msg)
-        //   {
-        //       // 1. 拉取最新的 map->odom 变换（忽略任何时间戳）
-        //       geometry_msgs::msg::TransformStamped tf_stamped;
-        //       try {
-        //           tf_stamped = tf_buffer_->lookupTransform(
-        //               "odom",               // 目标坐标系
-        //               msg->header.frame_id, // 源坐标系
-        //               tf2::TimePointZero);  // 时间零：强制取最新
-        //       }
-        //       catch (const tf2::TransformException &ex) {
-        //           RCLCPP_WARN(this->get_logger(),
-        //               "获取最新变换失败: 从 %s 到 odom: %s",
-        //               msg->header.frame_id.c_str(), ex.what());
-        //           return;
-        //       }
-          
-        //       // 2. 将原始 PoseStamped（连同它的 header）不做任何时间修改，应用到 odom
-        //       geometry_msgs::msg::PoseStamped goal_odom;
-        //       tf2::doTransform(*msg, goal_odom, tf_stamped);
-        //       end_pt_ << goal_odom.pose.position.x, goal_odom.pose.position.y;
-          
-        //       // 3. 提取位置
-        //       double x = goal_odom.pose.position.x;
-        //       double y = goal_odom.pose.position.y;
-          
-        //       // 4. 提取 yaw
-        //       tf2::Quaternion q(
-        //           goal_odom.pose.orientation.x,
-        //           goal_odom.pose.orientation.y,
-        //           goal_odom.pose.orientation.z,
-        //           goal_odom.pose.orientation.w);
-        //       double roll, pitch, yaw;
-        //       tf2::Matrix3x3(q).getRPY(roll, pitch, yaw);
-          
-        //       // 5. 日志与状态机触发
-        //       RCLCPP_INFO(this->get_logger(),
-        //           "在 odom 坐标系下，新目标: position=(%.2f, %.2f), yaw=%.2f",
-        //           x, y, yaw);
-          
-        //       trigger_ = true;
-        //       if (exec_state_ == EXEC_TRAJ) {
-        //           exec_state_ = REPLAN_TRAJ;
-        //       } else if (exec_state_ == WAIT_TARGET) {
-        //           exec_state_ = GEN_NEW_TRAJ;
-        //       }
-        //   }
-        // void goalPoseCallback(
-        //     const geometry_msgs::msg::PoseStamped::SharedPtr msg)
-        // {
-        //     // 0. 原始目标先变换到 odom（同之前逻辑）
-        //     geometry_msgs::msg::TransformStamped tf_src_odom;
-        //     try {
-        //         tf_src_odom = tf_buffer_->lookupTransform(
-        //             "odom",                   // 目标：odom
-        //             msg->header.frame_id,     // 源：msg->header.frame_id
-        //             tf2::TimePointZero        // 最新可用
-        //         );
-        //     }
-        //     catch (const tf2::TransformException &ex) {
-        //         RCLCPP_WARN(get_logger(),
-        //             "无法获取 %s->odom 变换: %s",
-        //             msg->header.frame_id.c_str(), ex.what());
-        //         return;
-        //     }
-        //     geometry_msgs::msg::PoseStamped goal_odom;
-        //     tf2::doTransform(*msg, goal_odom, tf_src_odom);
-        
-        //     // 1. 拉取最新的 map->odom 变换
-        //     geometry_msgs::msg::TransformStamped tf_map_odom;
-        //     try {
-        //         tf_map_odom = tf_buffer_->lookupTransform(
-        //             "map",                // 源：map
-        //             "odom",               // 目标：odom
-        //             tf2::TimePointZero    // 最新可用
-        //         );
-        //     }
-        //     catch (const tf2::TransformException &ex) {
-        //         RCLCPP_WARN(get_logger(),
-        //             "无法获取 map->odom 变换: %s", ex.what());
-        //         return;
-        //     }
-        
-        //     // 2. 计算 odom->map 的逆变换
-        //     tf2::Transform t_map_odom;
-        //     tf2::fromMsg(tf_map_odom.transform, t_map_odom);
-        //     tf2::Transform t_odom_map = t_map_odom.inverse();
-        
-        //     geometry_msgs::msg::TransformStamped tf_odom_map;
-        //     tf_odom_map.header.stamp    = tf_map_odom.header.stamp;
-        //     tf_odom_map.header.frame_id = "odom";
-        //     tf_odom_map.child_frame_id  = "map";
-        //     tf_odom_map.transform       = tf2::toMsg(t_odom_map);
-        
-        //     // 3. 将 goal_odom 再转换到 map，从而“减去”里程计漂移
-        //     geometry_msgs::msg::PoseStamped goal_map;
-        //     tf2::doTransform(goal_odom, goal_map, tf_odom_map);
-        
-        //     // 4. 更新终点并提取 yaw
-        //     end_pt_ << goal_map.pose.position.x,
-        //                goal_map.pose.position.y;
-        
-        //     tf2::Quaternion q(
-        //         goal_map.pose.orientation.x,
-        //         goal_map.pose.orientation.y,
-        //         goal_map.pose.orientation.z,
-        //         goal_map.pose.orientation.w);
-        //     double roll, pitch, yaw;
-        //     tf2::Matrix3x3(q).getRPY(roll, pitch, yaw);
-        
-        //     RCLCPP_INFO(get_logger(),
-        //         "在 map 坐标系下，新目标: position=(%.2f, %.2f), yaw=%.2f",
-        //         end_pt_[0], end_pt_[1], yaw);
-        
-        //     trigger_ = true;
-        //     if (exec_state_ == EXEC_TRAJ) {
-        //         exec_state_ = REPLAN_TRAJ;
-        //     } else if (exec_state_ == WAIT_TARGET) {
-        //         exec_state_ = GEN_NEW_TRAJ;
-        //     }
-        // }
-        
-          
-          
+    
 
         // std::unique_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
         FSM_EXEC_STATE exec_state_ = INIT;
@@ -777,6 +514,8 @@ void initialPoseCallback(const nav_msgs::msg::Odometry::SharedPtr msg)
         NonUniformBspline Last_position_traj;
         double traj_duration, duration_;
         double safe_check_distance;
+        int predict_collision_danger_limit_;
+        int predict_collision_sample_step_;
         // int N;
         // double dt;
         rclcpp::Time start_time;
@@ -786,6 +525,7 @@ void initialPoseCallback(const nav_msgs::msg::Odometry::SharedPtr msg)
         void publish_control_cmd();
         void bspline_process(double t);
         bool checkTrajCollision(double &distance);
+        bool checkPredictPathCollision();
 
         void planYaw(const Eigen::Vector2d &start_yaw, const double end_yaw_set);
         rclcpp::TimerBase::SharedPtr control_cmd_pub, tf, safety_timer_, plan_timer, optimis;

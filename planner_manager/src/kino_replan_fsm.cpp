@@ -47,133 +47,49 @@ bool kino_replan_fsm::checkTrajCollision(double &distance)
 
     return true;
 }
-// bool kino_replan_fsm::plan(
-//     Eigen::Vector2d position,
-//     Eigen::Vector2d vel_,
-//     Eigen::Vector2d acc_,
-//     Eigen::Vector2d end_pt,
-//     Eigen::Vector2d end_vel)
-// {
-//     // 1. 重置路径搜索器 & 记录启动时间
-//     kino_path_finder_->reset();
-//     start_time = rclcpp::Clock().now();
+bool kino_replan_fsm::checkPredictPathCollision()
+{
+    int danger_count = 0;
 
-//     // 2. 第一次有约束搜索
-//     int status = kino_path_finder_->search(
-//         position, vel_, acc_, end_pt, end_vel, true);
-//     auto t_search_start = rclcpp::Clock().now();
+    for (int i = 0; i < ACADO_N; i += predict_collision_sample_step_)
+    {
+        Eigen::Vector2d pt(acadoVariables.x[NX * i + 0], acadoVariables.x[NX * i + 1]);
 
-//     // 3. 如果未找到，再次无约束搜索
-//     if (status == KinodynamicAstar::NO_PATH) {
-//         RCLCPP_WARN(get_logger(), "[kino replan]: kinodynamic search fail, retrying...");
-//         kino_path_finder_->reset();
-//         status = kino_path_finder_->search(
-//             position, vel_, acc_, end_pt, end_vel, false);
-//         if (status == KinodynamicAstar::NO_PATH) {
-//             RCLCPP_ERROR(get_logger(), "[kino replan]: Can't find path.");
-//             have_traj = false;
-//             return false;
-//         }
-//         RCLCPP_INFO(get_logger(), "[kino replan]: retry search success.");
-//     } else {
-//         RCLCPP_INFO(get_logger(), "[kino replan]: kinodynamic search success.");
-//     }
-//     auto t_search_end = rclcpp::Clock().now();
-//     RCLCPP_INFO(get_logger(),
-//         "搜索耗时: %.2f ms",
-//         (t_search_end - t_search_start).seconds() * 1000.0);
+        if (CarType)
+        {
+            for (const auto &point : local_points)
+            {
+                Eigen::Vector2d correct = {
+                    pt.x() + point.x() * cos(odom_rpy(2)) - point.y() * sin(odom_rpy(2)),
+                    pt.y() + point.x() * sin(odom_rpy(2)) + point.y() * cos(odom_rpy(2))};
 
-//     // 4. 获取样本点并参数化 B-样条
-//     double ts = pp_.ctrl_pt_dist / pp_.max_vel_;
-//     std::vector<Eigen::Vector2d> point_set, start_end_derivatives;
-//     kino_path_finder_->getSamples(ts, point_set, start_end_derivatives);
+                double dist = edt_environment_->evaluateCoarseEDT(correct, -1.0);
 
-//     Eigen::MatrixXd ctrl_pts;
-//     NonUniformBspline::parameterizeToBspline(
-//         ts, point_set, start_end_derivatives, ctrl_pts);
+                if (dist <= Car_radius || !edt_environment_->sdf_map_->isInMap(correct))
+                {
+                    danger_count++;
+                    if (danger_count >= predict_collision_danger_limit_)
+                        return false;
+                }
+            }
+        }
+        else
+        {
+            double dist = edt_environment_->evaluateCoarseEDT(pt, -1.0);
+            if (dist <= Car_radius || !edt_environment_->sdf_map_->isInMap(pt))
+            {
+                danger_count++;
+                if (danger_count >= predict_collision_danger_limit_)
+                    return false;
+            }
+        }
+    }
 
-//     // 5. 优化 B-样条
-//     int cost_function = BsplineOptimizer::NORMAL_PHASE;
-//     if (status != KinodynamicAstar::REACH_END) {
-//         cost_function |= BsplineOptimizer::ENDPOINT;
-//     }
-//     auto t_opt_start = rclcpp::Clock().now();
-//     ctrl_pts = bspline_optimizers_[0]->BsplineOptimizeTraj(
-//         ctrl_pts, ts, cost_function, 1, 1);
-//     auto t_opt_end = rclcpp::Clock().now();
-//     RCLCPP_INFO(get_logger(),
-//         "优化耗时: %.2f ms",
-//         (t_opt_end - t_opt_start).seconds() * 1000.0);
+    return true;
+}
 
-//     // 6. 构造位置/速度/加速度 B-样条，并做可行性检查
-//     NonUniformBspline pos(ctrl_pts, 3, ts);
-//     pos.setPhysicalLimits(pp_.max_vel_, pp_.max_acc_);
 
-//     bool feasible = pos.checkFeasibility(false);
-//     int iter = 0;
-//     while (!feasible && rclcpp::ok() && iter++ < 3) {
-//         feasible = pos.reallocateTime();
-//     }
-//     position_traj_     = pos;
-//     velocity_traj_     = position_traj_.getDerivative();
-//     acceleration_traj_ = velocity_traj_.getDerivative();
-//     duration_          = position_traj_.getTimeSum();
-//     planYaw(start_yaw_, target_yaw);
-//     bspline_process(10086);  // 内部预处理（如生成 yaw 轨迹等）
 
-//     // 7. 在 "odom" 下采样轨迹点
-//     double t_min, t_max;
-//     position_traj_.getTimeSpan(t_min, t_max);
-//     std::vector<geometry_msgs::msg::PoseStamped> odom_poses;
-//     odom_poses.reserve(
-//         static_cast<size_t>((t_max - t_min) / 0.01) + 1);
-
-//     for (double t = t_min; t <= t_max; t += 0.01) {
-//         Eigen::Vector2d pt = position_traj_.evaluateDeBoor(t);
-//         geometry_msgs::msg::PoseStamped pose_msg;
-//         pose_msg.header.frame_id = "odom";
-//         pose_msg.header.stamp = this->now();
-//         pose_msg.pose.position.x = pt.x();
-//         pose_msg.pose.position.y = pt.y();
-//         pose_msg.pose.position.z = 0.0;
-//         // 如果需要 orientation，可用 yaw_traj_ 填写 pose.orientation
-//         odom_poses.push_back(pose_msg);
-//     }
-
-//     // 8. 获取最新 map <- odom 变换
-//     geometry_msgs::msg::TransformStamped tf_map_odom;
-//     try {
-//         tf_map_odom = tf_buffer_->lookupTransform(
-//             "map",               // 目标：map
-//             "odom",              // 源：odom
-//             tf2::TimePointZero); // 最新可用
-//     } catch (const tf2::TransformException &ex) {
-//         RCLCPP_WARN(get_logger(),
-//             "无法获取 map<-odom 变换: %s", ex.what());
-//         // 回退：直接发布 odom 下路径
-//         path_.header.frame_id = "odom";
-//         path_.header.stamp    = this->now();
-//         path_.poses           = odom_poses;
-//         path_pub_->publish(path_);
-//         have_traj = true;
-//         return true;
-//     }
-
-//     // 9. 转换到 map 并发布
-//     path_.header.frame_id = "map";
-//     path_.header.stamp    = this->now();
-//     path_.poses.clear();
-//     path_.poses.reserve(odom_poses.size());
-//     for (auto &odom_p : odom_poses) {
-//         geometry_msgs::msg::PoseStamped map_p;
-//         tf2::doTransform(odom_p, map_p, tf_map_odom);
-//         path_.poses.push_back(map_p);
-//     }
-//     path_pub_->publish(path_);
-
-//     have_traj = true;
-//     return true;
-// }
 bool kino_replan_fsm::plan(Eigen::Vector2d position,Eigen::Vector2d vel_,Eigen::Vector2d acc_,Eigen::Vector2d end_pt ,Eigen::Vector2d end_vel)
 {
     kino_path_finder_->reset();
@@ -462,6 +378,11 @@ void kino_replan_fsm::publish_control_cmd()
         pose_msg.pose.position.x = acadoVariables.x[NX * i + 0];
         pose_msg.pose.position.y = acadoVariables.x[NX * i + 1];
         predict_path.poses.push_back(pose_msg);
+    }
+    if (!checkPredictPathCollision())
+    {
+        RCLCPP_WARN(this->get_logger(), "[MPC]: Control command aborted due to predicted collision.");
+        exec_state_ = REPLAN_TRAJ;
     }
 
     pose_msg.pose.position.x = position_traj_.evaluateDeBoorT(t_cur)(0);
