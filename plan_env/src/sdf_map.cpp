@@ -8,6 +8,8 @@
 #include <sensor_msgs/point_cloud2_iterator.hpp>
 #include <string>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
+#include <cmath>
+#include <algorithm>
 
 void SDFMap::initMap(std::shared_ptr<rclcpp::Node> nh)
 {
@@ -22,6 +24,9 @@ void SDFMap::initMap(std::shared_ptr<rclcpp::Node> nh)
 	node_->declare_parameter<std::vector<std::string>>("sdf_map.global_map_path", {});
 	std::vector<std::string> global_map_path;
 	node_->get_parameter("sdf_map.global_map_path", global_map_path);
+	mp_.gobal_obstacles_inflation_ = node_->declare_parameter<double>("sdf_map.gobal_obstacles_inflation", 0.0009);
+	mp_.local_obstacles_inflation_ = node_->declare_parameter<double>("sdf_map.localmap.obstacles_inflation", 0.0009);
+	mp_.gobalonline_obstacles_inflation_ = node_->declare_parameter<double>("sdf_map.gobalmap_online.obstacles_inflation", 0.0009);
 	if (md_.use_global_map)
 	{
 		if (global_map_path.size() < md_.global_map_num)
@@ -68,7 +73,7 @@ void SDFMap::initMap(std::shared_ptr<rclcpp::Node> nh)
 	}
 
 	esdf_timer_ = node_->create_wall_timer(0.05s, std::bind(&SDFMap::updateESDFCallback, this));
-	mp_.obstacles_inflation_ = node_->declare_parameter<double>("sdf_map.obstacles_inflation", 0.0009);
+	
 	mp_.local_map_margin_ = node_->declare_parameter<int>("sdf_map.local_map_margin", 10);
 	mp_.local_update_range_(0) = node_->declare_parameter<double>("sdf_map.local_update_range_x", 3.0);
 	mp_.local_update_range_(1) = node_->declare_parameter<double>("sdf_map.local_update_range_y", 3.0);
@@ -244,6 +249,36 @@ Global_Map SDFMap::load_map(std::string &path, const std::string &frame,int& map
 			}
 		}
 	}
+	
+	
+	if(mp.gobal_obstacles_inflation_ / gm.resolution_>= 1)
+	{
+	int inf_step = static_cast<int>(std::ceil(mp.gobal_obstacles_inflation_ / gm.resolution_));
+	std::vector<char> inflated_map(gm.occupancy_buffer_inflate_Global_Map);  
+
+	for (int y = 0; y < gm.map_voxel_num_(1); ++y) {
+		for (int x = 0; x < gm.map_voxel_num_(0); ++x) {
+			if (gm.occupancy_buffer_inflate_Global_Map[x * gm.map_voxel_num_(1) + y] == 1) {
+				// 在障碍点周围进行膨胀
+				for (int dx = -inf_step; dx <= inf_step; ++dx) {
+					for (int dy = -inf_step; dy <= inf_step; ++dy) {
+						int nx = x + dx;
+						int ny = y + dy;
+						if (nx >= 0 && nx < gm.map_voxel_num_(0) && ny >= 0 && ny < gm.map_voxel_num_(1)) {
+							inflated_map[nx * gm.map_voxel_num_(1) + ny] = 1;
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+	gm.occupancy_buffer_inflate_Global_Map = inflated_map;
+	}
+
+
+
 	mp.resolution_ = gm.resolution_;
 	mp.map_origin_ = gm.map_origin_;
 	mp_.map_size_(0) = std::max(image.cols * gm.resolution_, mp_.map_size_(0));
@@ -333,7 +368,6 @@ void SDFMap::updateGobalMapOnlineCallback(const sensor_msgs::msg::PointCloud2::S
         return;
     }
 
-
     auto cloud_msg = std::make_unique<sensor_msgs::msg::PointCloud2>(*msg);
     try {
         *cloud_msg = tf2_buffer_->transform(*cloud_msg, "map", tf2::durationFromSec(0.1));
@@ -342,11 +376,14 @@ void SDFMap::updateGobalMapOnlineCallback(const sensor_msgs::msg::PointCloud2::S
         return;
     }
 
- 
+    // 清空全局地图膨胀栅格
     std::fill(md_.Global_Map_online.occupancy_buffer_inflate_Global_Map.begin(),
               md_.Global_Map_online.occupancy_buffer_inflate_Global_Map.end(), 0);
 
+    // 计算固定膨胀步长
+    int inf_step = static_cast<int>(std::ceil(mp_.gobalonline_obstacles_inflation_ / mp_.resolution_));
 
+    // 点云字段
     sensor_msgs::PointCloud2ConstIterator<float> iter_x(*cloud_msg, "x");
     sensor_msgs::PointCloud2ConstIterator<float> iter_y(*cloud_msg, "y");
     sensor_msgs::PointCloud2ConstIterator<float> iter_z(*cloud_msg, "z");
@@ -355,32 +392,41 @@ void SDFMap::updateGobalMapOnlineCallback(const sensor_msgs::msg::PointCloud2::S
     for (; iter_x != iter_x.end(); ++iter_x, ++iter_y, ++iter_z, ++iter_i) {
         float ix = *iter_x, iy = *iter_y, iz = *iter_z, intensity = *iter_i;
 
+        float height = iz - md_.laser_z_;
+
+        // 过滤不合格点
         if (intensity < gobalmap_min_obstacle_intensity_ || intensity > gobalmap_max_obstacle_intensity_ ||
-            iz - md_.laser_z_ < -0.2 || iz - md_.laser_z_ > gobalmap_max_obstacle_height_) {
+            height < -0.2f || height > gobalmap_max_obstacle_height_) {
             continue;
         }
 
-        Eigen::Vector2d pt_2d(ix, iy);
-
-    
-        if ((pt_2d - md_.laser_pos_).norm() < gobalmap_blind_distance_) {
+        Eigen::Vector2d pt(ix, iy);
+        if ((pt - md_.laser_pos_).norm() < gobalmap_blind_distance_) {
             continue;
         }
 
-     
-        if (!isValid(world2map(pt_2d, md_.Global_Map_online), md_.Global_Map_online)) {
-            continue;
-        }
+        // 膨胀 inf_step 栅格
+        for (int dx = -inf_step; dx <= inf_step; ++dx) {
+            for (int dy = -inf_step; dy <= inf_step; ++dy) {
+                Eigen::Vector2d p_inflate = pt + Eigen::Vector2d(
+                    dx * md_.Global_Map_online.resolution_,
+                    dy * md_.Global_Map_online.resolution_);
 
-       
-        Eigen::Vector2i idx = world2map(pt_2d, md_.Global_Map_online);
-        int buffer_idx = idx(0) * md_.Global_Map_online.map_voxel_num_(1) + idx(1);
-        md_.Global_Map_online.occupancy_buffer_inflate_Global_Map[buffer_idx] = 1;
+                Eigen::Vector2i idx = world2map(p_inflate, md_.Global_Map_online);
+                if (!isValid(idx, md_.Global_Map_online)) {
+                    continue;
+                }
+
+                int buffer_idx = idx(0) * md_.Global_Map_online.map_voxel_num_(1) + idx(1);
+                md_.Global_Map_online.occupancy_buffer_inflate_Global_Map[buffer_idx] = 1;
+            }
+        }
     }
 
     md_.use_global_map_online = true;
-  
 }
+
+
 
 void SDFMap::laserCallback(const sensor_msgs::msg::LaserScan::ConstSharedPtr &laser_msg)
 {
@@ -448,7 +494,7 @@ void SDFMap::laserCallback(const sensor_msgs::msg::LaserScan::ConstSharedPtr &la
 
 	pcl::PointXY pt;
 	Eigen::Vector2d p2d, p2d_inf;
-	int inf_step = static_cast<int>(std::ceil(mp_.obstacles_inflation_ / mp_.resolution_));
+	int inf_step = static_cast<int>(std::ceil(mp_.local_obstacles_inflation_ / mp_.resolution_));
 
 	double max_x = mp_.map_min_boundary_(0);
 	double max_y = mp_.map_min_boundary_(1);
@@ -507,29 +553,30 @@ void SDFMap::laserCallback(const sensor_msgs::msg::LaserScan::ConstSharedPtr &la
 
 void SDFMap::cloudCallback(const sensor_msgs::msg::PointCloud2::ConstSharedPtr &cloud_msg_in)
 {
-    if (!md_.has_odom_||!is_inited_) {
+    if (!md_.has_odom_ || !is_inited_) {
         return;
     }
-
 
     auto cloud_msg = std::make_unique<sensor_msgs::msg::PointCloud2>(*cloud_msg_in);
     try {
         *cloud_msg = tf2_buffer_->transform(*cloud_msg, "map", tf2::durationFromSec(0.1));
     } catch (const tf2::ExtrapolationException &ex) {
-        RCLCPP_ERROR(node_->get_logger(),
-                     "Error while transforming cloud to map: %s", ex.what());
+        RCLCPP_ERROR(node_->get_logger(), "Error while transforming cloud to map: %s", ex.what());
         return;
     }
 
-    
     resetBuffer(md_.laser_pos_ - mp_.local_update_range_,
-		md_.laser_pos_ + mp_.local_update_range_);
+                md_.laser_pos_ + mp_.local_update_range_);
 
-    int inf_step = static_cast<int>(std::ceil(mp_.obstacles_inflation_ / mp_.resolution_));
     double max_x = mp_.map_min_boundary_(0), max_y = mp_.map_min_boundary_(1);
     double min_x = mp_.map_max_boundary_(0), min_y = mp_.map_max_boundary_(1);
 
-    // 4. 遍历点云
+    float mid_intensity = 0.5f * (localmap_min_obstacle_intensity_ + localmap_max_obstacle_intensity_);
+    float max_height = localmap_max_obstacle_height_;
+    float min_height = localmap_min_obstacle_height_;
+    float mid_height = 0.5f * (min_height + max_height);
+    float max_inflation = mp_.local_obstacles_inflation_;
+
     sensor_msgs::PointCloud2ConstIterator<float> iter_x(*cloud_msg, "x");
     sensor_msgs::PointCloud2ConstIterator<float> iter_y(*cloud_msg, "y");
     sensor_msgs::PointCloud2ConstIterator<float> iter_z(*cloud_msg, "z");
@@ -537,13 +584,13 @@ void SDFMap::cloudCallback(const sensor_msgs::msg::PointCloud2::ConstSharedPtr &
 
     for (; iter_x != iter_x.end(); ++iter_x, ++iter_y, ++iter_z, ++iter_i) {
         float ix = *iter_x, iy = *iter_y, iz = *iter_z, intensity = *iter_i;
-	
+
+        float height = iz - md_.laser_z_;
+
         if (intensity < localmap_min_obstacle_intensity_ || intensity > localmap_max_obstacle_intensity_ ||
-            iz - md_.laser_z_ < localmap_min_obstacle_height_ || iz - md_.laser_z_ > localmap_max_obstacle_height_) {
-			
+            height < min_height || height > max_height) {
             continue;
         }
-
 
         Eigen::Vector2d p2d(ix, iy);
         if ((p2d - md_.laser_pos_).norm() < localmap_blind_distance_) {
@@ -552,6 +599,32 @@ void SDFMap::cloudCallback(const sensor_msgs::msg::PointCloud2::ConstSharedPtr &
 
         if (std::abs(ix - md_.laser_pos_(0)) > mp_.local_update_range_(0) ||
             std::abs(iy - md_.laser_pos_(1)) > mp_.local_update_range_(1)) {
+            continue;
+        }
+
+        // ---------- 自适应膨胀 ----------
+        float intensity_ratio = std::min(1.0f, std::max<float>(0.0f, 
+			(intensity - localmap_min_obstacle_intensity_) /
+			(mid_intensity - localmap_min_obstacle_intensity_)));
+        float height_ratio = std::min(1.0f, std::max(0.0f, (height - min_height) /
+                                                           (mid_height - min_height)));
+
+        float inflation_radius = max_inflation * std::max(intensity_ratio, height_ratio);
+        if (inflation_radius < mp_.resolution_) {
+            inflation_radius = 0.0;  // 不膨胀
+        }
+
+        int inf_step = static_cast<int>(std::ceil(inflation_radius / mp_.resolution_));
+        if (inf_step == 0) {
+            Eigen::Vector2i idx2d;
+            posToIndex(p2d, idx2d);
+            if (isInMap(idx2d)) {
+                md_.occupancy_buffer_inflate_[toAddress(idx2d)] = 1;
+                max_x = std::max<double>(max_x, ix);
+				max_y = std::max<double>(max_y, iy);
+				min_x = std::min<double>(min_x, ix);
+				min_y = std::min<double>(min_y, iy);
+            }
             continue;
         }
 
@@ -576,22 +649,20 @@ void SDFMap::cloudCallback(const sensor_msgs::msg::PointCloud2::ConstSharedPtr &
         }
     }
 
-
     min_x = std::min(min_x, md_.laser_pos_(0));
     min_y = std::min(min_y, md_.laser_pos_(1));
     max_x = std::max(max_x, md_.laser_pos_(0));
     max_y = std::max(max_y, md_.laser_pos_(1));
-
 
     posToIndex(md_.laser_pos_ - mp_.local_update_range_, md_.local_bound_min_);
     posToIndex(md_.laser_pos_ + mp_.local_update_range_, md_.local_bound_max_);
     boundIndex(md_.local_bound_min_);
     boundIndex(md_.local_bound_max_);
 
-    // 7. 标记更新
     md_.esdf_need_update_ = true;
     md_.update_num_ += 1;
 }
+
 
 
 

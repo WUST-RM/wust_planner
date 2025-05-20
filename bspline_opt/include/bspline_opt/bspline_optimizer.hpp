@@ -6,7 +6,53 @@
 #include <rclcpp/rclcpp.hpp>
 
 namespace fast_planner
-{
+{   class Polyhedron
+    {
+    public:
+        // 超平面表示：n^T * x ≤ d
+        struct HalfPlane {
+            Eigen::Vector2d normal;
+            double offset;  // 即 d
+        };
+    
+        std::vector<HalfPlane> half_planes_;
+    
+        Polyhedron() {}
+    
+        /// 添加超平面 n^T * x ≤ d
+        void addPlane(const Eigen::Vector2d &n, double d)
+        {
+            half_planes_.push_back({n.normalized(), d});
+        }
+    
+        /// 判断点是否在 Polyhedron 内部
+        bool inside(const Eigen::Vector2d &pt) const
+        {
+            for (const auto &hp : half_planes_) {
+                if (hp.normal.dot(pt) > hp.offset + 1e-6)  // 允许微小误差
+                    return false;
+            }
+            return true;
+        }
+    
+        /// 多面体是否合法（至少三个面）
+        bool valid() const
+        {
+            return half_planes_.size() >= 3;
+        }
+    
+        /// 获取所有平面参数（可用于QP/优化器）
+        void getConstraints(Eigen::MatrixXd &A, Eigen::VectorXd &b) const
+        {
+            size_t n = half_planes_.size();
+            A.resize(n, 2);
+            b.resize(n);
+            for (size_t i = 0; i < n; ++i) {
+                A.row(i) = half_planes_[i].normal.transpose();
+                b(i) = half_planes_[i].offset;
+            }
+        }
+    };
     class BsplineOptimizer
     {
     public:
@@ -20,7 +66,9 @@ namespace fast_planner
         static const int GUIDE_PHASE;
         static const int NORMAL_PHASE;
 
-        BsplineOptimizer() {}
+        BsplineOptimizer() {
+            target_point_ = Eigen::Vector2d::Zero();
+        }
         ~BsplineOptimizer() {}
         /* main API */
         void setEnvironment(const EDTEnvironment::Ptr &env);
@@ -36,6 +84,22 @@ namespace fast_planner
         void setCostFunction(const int &cost_function);
         void setTerminateCond(const int &max_num_id, const int &max_time_id);
         void optimize();
+        bool generateHomotopicCorridor(
+            const std::vector<Eigen::Vector2d>& path_pts,
+            double safety_radius,
+            std::vector<Polyhedron>& corridor);
+        // Eigen::MatrixXd optimizeWithCorridor(
+        //         const Eigen::MatrixXd& init_ctrl_pts,
+        //         double ts,
+        //         const std::vector<Polyhedron>& corridor);
+        //         void buildCost(
+        //             const Eigen::MatrixXd &ctrl_pts,
+        //             double ts,
+        //             Eigen::SparseMatrix<double> &H,
+        //             Eigen::VectorXd &f);
+        //             void setTargetPoint(const Eigen::VectorXd &pt) {
+        //                 target_point_ = pt;
+        //             }
 
         typedef unique_ptr<BsplineOptimizer> Ptr;
 
@@ -81,6 +145,7 @@ namespace fast_planner
         vector<Eigen::Vector2d> g_endpoint_;
         vector<Eigen::Vector2d> g_guide_;
         vector<Eigen::Vector2d> g_waypoints_;
+        Eigen::VectorXd target_point_;  
 
         int variable_num_;                  // optimization variables
         int iter_num_;                      // iteration of the solver

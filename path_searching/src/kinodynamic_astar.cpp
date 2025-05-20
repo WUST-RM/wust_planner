@@ -194,7 +194,7 @@ namespace fast_planner
                     if (pro_node != NULL && pro_node->node_state == IN_CLOSE_SET)
                     {
                         if (init_search)
-                            std::cout << "close" << std::endl;
+                         std::cout << "close" << std::endl;
                         continue;
                     }
 
@@ -203,7 +203,7 @@ namespace fast_planner
                     if (fabs(pro_v(0)) > max_vel_ || fabs(pro_v(1)) > max_vel_)
                     {
                         if (init_search)
-                            std::cout << "vel" << std::endl;
+                           std::cout << "vel" << std::endl;
                         continue;
                     }
 
@@ -213,7 +213,7 @@ namespace fast_planner
                     if (diff.norm() == 0 && ((!dynamic) || diff_time == 0))
                     {
                         if (init_search)
-                            std::cout << "same" << std::endl;
+                           std::cout << "same" << std::endl;
                         continue;
                     }
 
@@ -221,6 +221,9 @@ namespace fast_planner
                     Eigen::Vector2d pos;
                     Eigen::Matrix<double, 4, 1> xt;
                     bool is_occ = false;
+
+
+
                     for (int k = 1; k <= check_num_; ++k)
                     {
                         double dt = tau * double(k) / double(check_num_);
@@ -323,9 +326,9 @@ namespace fast_planner
                 }
             // init_search = false;
         }
-        cout << "open set empty, no path!" << endl;
-        cout << "use node num: " << use_node_num_ << endl;
-        cout << "iter num: " << iter_num_ << endl;
+        // cout << "open set empty, no path!" << endl;
+        // cout << "use node num: " << use_node_num_ << endl;
+        // cout << "iter num: " << iter_num_ << endl;
         return NO_PATH;
     }
    
@@ -433,22 +436,73 @@ namespace fast_planner
         is_shot_succ_ = true;
         return true;
     }
+    // void KinodynamicAstar::retrievePath(PathNodePtr end_node)
+    // {
+    //     PathNodePtr cur_node = end_node;
+    //     if (path_nodes_.empty()) {
+    //         std::cout << "retrieve path" << std::endl;
+    //     }
+    //     path_nodes_.push_back(cur_node);
+
+    //     while (cur_node->parent != NULL)
+    //     {
+    //         cur_node = cur_node->parent;
+    //         path_nodes_.push_back(cur_node);
+    //     }
+
+    //     reverse(path_nodes_.begin(), path_nodes_.end());
+    // }
     void KinodynamicAstar::retrievePath(PathNodePtr end_node)
-    {
-        PathNodePtr cur_node = end_node;
-        if (path_nodes_.empty()) {
-            std::cout << "retrieve path" << std::endl;
-        }
-        path_nodes_.push_back(cur_node);
-
-        while (cur_node->parent != NULL)
-        {
-            cur_node = cur_node->parent;
-            path_nodes_.push_back(cur_node);
-        }
-
-        reverse(path_nodes_.begin(), path_nodes_.end());
+{
+    PathNodePtr cur_node = end_node;
+    if (path_nodes_.empty()) {
+        
     }
+
+    path_nodes_.clear();
+    path_nodes_.push_back(cur_node);
+
+    while (cur_node->parent != NULL)
+    {
+        PathNodePtr parent = cur_node->parent;
+
+        Eigen::Vector4d state = parent->state;
+        Eigen::Vector4d next_state = cur_node->state;
+
+        Eigen::Vector2d um = cur_node->input;
+        double tau = cur_node->duration;
+
+        bool is_valid = true;
+        int check_num = check_num_; 
+
+        for (int k = 1; k <= check_num; ++k)
+        {
+            double dt = tau * double(k) / double(check_num);
+            Eigen::Vector4d xt;
+            stateTransit(state, xt, um, dt);
+            Eigen::Vector2d pos = xt.head<2>();
+
+            if (!edt_environment_->sdf_map_->isInMap(pos) ||
+                edt_environment_->sdf_map_->getInflateOccupancy(pos) == 1)
+            {
+                is_valid = false;
+                break;
+            }
+        }
+
+        if (!is_valid)
+        {
+            std::cout << "[retrievePath] Invalid segment detected between nodes, aborting backtrace." << std::endl;
+            break;  
+        }
+
+        path_nodes_.push_back(parent);
+        cur_node = parent;
+    }
+
+    std::reverse(path_nodes_.begin(), path_nodes_.end());
+}
+
     std::vector<PathNodePtr> KinodynamicAstar::getVisitedNodes()
     {
         vector<PathNodePtr> visited;
@@ -562,9 +616,7 @@ namespace fast_planner
     }
     void KinodynamicAstar::reset()
     {    
-        if (path_nodes_.empty()) {
-        std::cout << "retrieve path" << std::endl;
-    }
+        
         expanded_nodes_.clear();
         path_nodes_.clear();
 
@@ -586,11 +638,9 @@ namespace fast_planner
 
     std::vector<Eigen::Vector2d> KinodynamicAstar::getKinoTraj(double delta_t)
     {    
-        if (path_nodes_.empty()) {
-        std::cout << "retrieve path" << std::endl;
-    }
+        
         vector<Eigen::Vector2d> state_list;
-        std::cout << "path_nodes_" << path_nodes_.size() << std::endl;
+        //std::cout << "path_nodes_" << path_nodes_.size() << std::endl;
         /* ---------- get traj of searching ---------- */
         PathNodePtr node = path_nodes_.back();
         Eigen::Matrix<double, 4, 1> x0, xt;
@@ -634,9 +684,7 @@ namespace fast_planner
     void KinodynamicAstar::getSamples(double &ts, vector<Eigen::Vector2d> &point_set,
                                       vector<Eigen::Vector2d> &start_end_derivatives)
     {    
-        if (path_nodes_.empty()) {
-        std::cout << "retrieve path" << std::endl;
-    }
+       
         /* ---------- path duration ---------- */
         double T_sum = 0.0;
         if (is_shot_succ_)
@@ -744,4 +792,9 @@ namespace fast_planner
         start_end_derivatives.push_back(start_acc);
         start_end_derivatives.push_back(end_acc);
     }
+  
+    
+    
+
+
 }

@@ -7,7 +7,11 @@ endif()
 
 find_package(ament_cmake_auto REQUIRED)
 find_package(NLopt REQUIRED)
+find_package(Eigen3 REQUIRED)
+find_package(osqp REQUIRED)
+find_package(OsqpEigen REQUIRED)
 ament_auto_find_build_dependencies()
+include_directories(include)
 ###########
 ## Build ##
 ###########

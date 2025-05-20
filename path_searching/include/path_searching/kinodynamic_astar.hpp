@@ -18,6 +18,9 @@ namespace fast_planner
 #define NOT_EXPAND 'c'
 #define inf 1 >> 30
 
+
+
+
     class PathNode
     {
     public:
@@ -64,6 +67,7 @@ namespace fast_planner
             }
             return seed;
         }
+
     };
 
     class NodeHashTable
@@ -171,6 +175,7 @@ namespace fast_planner
         void stateTransit(Eigen::Matrix<double, 4, 1> &state0, Eigen::Matrix<double, 4, 1> &state1,
                           Eigen::Vector2d um, double tau);
         int timeToIndex(double time);
+        
 
         EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     };

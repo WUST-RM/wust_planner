@@ -59,7 +59,9 @@ struct MappingParameters
   Eigen::Vector2i map_voxel_num_; // map range in index
 
   double resolution_, resolution_inv_;
-  double obstacles_inflation_;
+  double gobal_obstacles_inflation_;
+  double local_obstacles_inflation_;
+  double gobalonline_obstacles_inflation_;
   bool show_esdf_time_, show_occ_time_;
 
   string frame_id_;

@@ -1,6 +1,7 @@
 #include "bspline_opt/bspline_optimizer.hpp"
+#include <iostream>
 #include <nlopt.hpp>
-
+#include <OsqpEigen/OsqpEigen.h>  // 确保你使用的是 osqp-eigen 包
 namespace fast_planner
 {
     const int BsplineOptimizer::SMOOTHNESS = (1 << 0);
@@ -231,8 +232,8 @@ namespace fast_planner
             }
         }
 
-        if (!(cost_function_ & GUIDE))
-            RCLCPP_INFO_STREAM(node_->get_logger(), "iter num: " << iter_num_);
+        // if (!(cost_function_ & GUIDE))
+        //     RCLCPP_INFO_STREAM(node_->get_logger(), "iter num: " << iter_num_);
     }
     void BsplineOptimizer::combineCost(const std::vector<double> &x, std::vector<double> &grad,
                                        double &f_combine)
@@ -553,5 +554,187 @@ namespace fast_planner
         }
         return false;
     }
+//     bool BsplineOptimizer::generateHomotopicCorridor(
+//         const std::vector<Eigen::Vector2d>& path_pts,
+//         double safety_radius,
+//         std::vector<Polyhedron>& corridor)
+// {
+//     corridor.clear();
+//     if (!edt_environment_ || path_pts.size() < 2) return false;
 
-}
+//     // 对每段生成一个 Polyhedron
+//     for (size_t i = 0; i + 1 < path_pts.size(); ++i) {
+//         const auto &p1 = path_pts[i];
+//         const auto &p2 = path_pts[i+1];
+//         Eigen::Vector2d mid = 0.5 * (p1 + p2);
+//         Eigen::Vector2d dir = (p2 - p1).normalized();
+
+//         // 四个法向（2D）
+//         std::array<Eigen::Vector2d,4> normals = {{
+//             Eigen::Vector2d(-dir.y(), dir.x()),  // 左法向
+//             Eigen::Vector2d( dir.y(),-dir.x()),  // 右法向
+//             Eigen::Vector2d( 1, 0),              // x+
+//             Eigen::Vector2d(-1, 0)               // x-
+//         }};
+
+//         Polyhedron poly;
+//         // 利用 edt_environment_ 评估距离
+//         for (auto &n : normals) {
+//             double lo = 0, hi = safety_radius * 5;
+//             for (int it = 0; it < 16; ++it) {
+//                 double mid_delta = 0.5 * (lo + hi);
+//                 Eigen::Vector2d test_pt = mid + mid_delta * n;
+//                 double dist;
+//                 Eigen::Vector2d grad;
+//                 // 这里使用带梯度的 EDT 评估
+//                 edt_environment_->evaluateEDTWithGrad(test_pt, /*time=*/0.0, dist, grad);
+//                 // 若与所有障碍（含动态预测）距离大于安全半径，继续扩张
+//                 if (dist > safety_radius)
+//                     lo = mid_delta;
+//                 else
+//                     hi = mid_delta;
+//             }
+//             double δ = lo;
+//             // 添加超平面 nᵀ x ≤ nᵀ mid + δ
+//             poly.addPlane(n, n.dot(mid) + δ);
+//         }
+//         corridor.push_back(poly);
+//     }
+//     return true;
+// }
+// Eigen::MatrixXd BsplineOptimizer::optimizeWithCorridor(
+//     const Eigen::MatrixXd& init_ctrl_pts,
+//     double ts,
+//     const std::vector<Polyhedron>& corridor)
+// {
+//     // 1. 构建 cost 项：H 和 f
+//     Eigen::SparseMatrix<double> H;
+//     Eigen::VectorXd f;
+
+//     buildCost(init_ctrl_pts, ts, H, f);  
+
+
+//     // 2. 构建不等式约束 A * x <= b
+//     std::vector<Eigen::Triplet<double>> A_triplets;
+//     std::vector<double> b_vals;
+//     int row = 0;
+
+//     const int dim = init_ctrl_pts.rows();    // e.g. 2
+//     const int N = init_ctrl_pts.cols();      // 控制点数量
+//     for (size_t seg = 0; seg < corridor.size(); ++seg) {
+//         Eigen::MatrixXd Ai;
+//         Eigen::VectorXd bi;
+//         corridor[seg].getConstraints(Ai, bi);  // Ai * x <= bi
+
+//         int num_planes = Ai.rows();
+
+//         for (int i = 0; i < num_planes; ++i) {
+//             for (int j = 0; j < dim; ++j) {
+//                 int var_idx = seg * dim + j;
+//                 A_triplets.emplace_back(row, var_idx, Ai(i, j));
+//             }
+//             b_vals.push_back(bi(i));
+//             row++;
+//         }
+//     }
+//     std::cout<<  "A_triplets.size() = "<<  A_triplets.size()<<  std::endl;
+
+//     Eigen::SparseMatrix<double> A(row, dim * N);
+//     std::cout<<  "A"<<  std::endl;
+//     A.setFromTriplets(A_triplets.begin(), A_triplets.end());
+//     std::cout<<  "set  A"<<  std::endl;
+//     Eigen::VectorXd b = Eigen::Map<Eigen::VectorXd>(b_vals.data(), b_vals.size());
+
+//     // 3. 使用 osqp-eigen 进行优化
+//     OsqpEigen::Solver solver;
+//     std::cout<<  "OSQP solver initialized"<<  std::endl;
+
+//     solver.settings()->setWarmStart(true);
+//     solver.settings()->setVerbosity(false);
+//     solver.settings()->setMaxIteration(200);
+//     solver.settings()->setAbsoluteTolerance(1e-3);
+//     solver.settings()->setRelativeTolerance(1e-3);
+//     std::cout<<  "OSQP solver started"<<  std::endl;
+
+//     solver.data()->setNumberOfVariables(dim * N);
+//     solver.data()->setNumberOfConstraints(row);
+
+//     if (!solver.data()->setHessianMatrix(H))
+//         throw std::runtime_error("Failed to set Hessian");
+//     if (!solver.data()->setGradient(f))
+//         throw std::runtime_error("Failed to set gradient");
+//     if (!solver.data()->setLinearConstraintsMatrix(A))
+//         throw std::runtime_error("Failed to set constraint matrix");
+//         Eigen::VectorXd lower_bound = Eigen::VectorXd::Constant(row, -OsqpEigen::INFTY);
+//         if (!solver.data()->setLowerBound(lower_bound))
+//             throw std::runtime_error("Failed to set lower bound");
+        
+//     if (!solver.data()->setUpperBound(b))
+//         throw std::runtime_error("Failed to set upper bound");
+
+//     if (!solver.initSolver())
+//         throw std::runtime_error("OSQP solver initialization failed");
+
+//     if (!solver.solve())
+//         throw std::runtime_error("OSQP failed to solve");
+
+//     Eigen::VectorXd X_opt = solver.getSolution();
+
+//     // 4. 将结果重组成控制点矩阵
+//     Eigen::MatrixXd ctrl_opt(dim, N);
+//     for (int i = 0; i < N; ++i) {
+//         for (int j = 0; j < dim; ++j) {
+//             ctrl_opt(j, i) = X_opt(i * dim + j);
+//         }
+//     }
+
+//     return ctrl_opt;
+// }
+// void BsplineOptimizer::buildCost(
+//     const Eigen::MatrixXd &ctrl_pts,
+//     double ts,
+//     Eigen::SparseMatrix<double> &H,
+//     Eigen::VectorXd &f)
+// {
+//     int dim = ctrl_pts.rows();           // e.g., 2 for 2D
+//     int N   = ctrl_pts.cols();           // 控制点个数
+//     int M   = dim * N;                   // 变量维度
+
+//     // 1. 二次平滑项: ∫‖x''(t)‖^2 dt → 离散为 D^T D
+//     //    D_shape: ( (N-2)*dim ) x M
+//     Eigen::SparseMatrix<double> D((N-2)*dim, M);
+//     std::vector<Eigen::Triplet<double>> d_trip;
+//     for (int i = 0; i < N-2; ++i) {
+//         for (int d = 0; d < dim; ++d) {
+//             // 离散二阶差分: x_{i} - 2 x_{i+1} + x_{i+2}
+//             int row = i*dim + d;
+//             d_trip.emplace_back(row, (i+0)*dim + d,  1.0);
+//             d_trip.emplace_back(row, (i+1)*dim + d, -2.0);
+//             d_trip.emplace_back(row, (i+2)*dim + d,  1.0);
+//         }
+//     }
+//    // std::cout<<  "D_shape: "<< D.rows() << " x " << D.cols() << std::endl;
+//     D.setFromTriplets(d_trip.begin(), d_trip.end());
+
+//     // Hessian = 2 * D^T * D * (weight / ts)
+//     double w_smooth = this->lambda1_;  // 用户配置
+//     H = 2.0 * (D.transpose() * D);
+//     H *= (w_smooth / ts);
+
+//     // 2. 终点 / 端点拟合项:  w_end * ‖x(T)-x_goal‖^2
+//     //    只在最后一个控制点上加二次项
+//     double w_end = this->lambda4_;
+//     for (int d = 0; d < dim; ++d) {
+//         int idx = (N-1)*dim + d;
+//         H.coeffRef(idx, idx) += 2.0 * w_end;
+//     }
+
+//     // 3. 线性项 f: 如果要加线性偏置（比如目标偏置），这里可设置 f(idx) = -2 w_end * goal[d]
+//     f = Eigen::VectorXd::Zero(M);
+//     for (int d = 0; d < dim; ++d) {
+//         int idx = (N-1)*dim + d;
+//         f(idx) = -2.0 * w_end * target_point_(d);
+//     }
+// }
+
+ }

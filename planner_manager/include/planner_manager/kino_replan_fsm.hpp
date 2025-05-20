@@ -57,10 +57,10 @@ namespace fast_planner
             pp_.ctrl_pt_dist = this->declare_parameter<double>("manager.control_points_distance", 0.5);
             pp_.max_vel_ = this->declare_parameter<double>("manager.max_vel", 3.0);
             pp_.max_acc_ = this->declare_parameter<double>("manager.max_acc", 1.0);
-            pp_.max_jerk_ = this->declare_parameter<double>("manager.max_jerk", 2.);
+            pp_.max_jerk_ = this->declare_parameter<double>("manager.max_jerk", 2.0);
             bspline_optimizers_.resize(3);
-            base_frame_ = this->declare_parameter<std::string>("manager.base_frame", "");
-            std::string odom_topic = this->declare_parameter<std::string>("manager.odometry", std::string("/odom"));
+            base_frame_ = this->declare_parameter<std::string>("manager.base_frame", "gimbal_yaw");
+            std::string odom_topic = this->declare_parameter<std::string>("manager.odometry", std::string("odometry"));
             initial_pose_subscription_ = this->create_subscription<nav_msgs::msg::Odometry>(
                 odom_topic, 10, std::bind(&kino_replan_fsm::initialPoseCallback, this, std::placeholders::_1));
 
@@ -549,6 +549,12 @@ namespace fast_planner
         void bspline_process(double t);
         bool checkTrajCollision(double &distance);
         bool checkPredictPathCollision();
+        // void generateHomotopicCorridorSegment(
+        //     const Eigen::Vector2d &p1,
+        //     const Eigen::Vector2d &p2,
+        //     const ESDFMap2D &esdf,
+        //     double safety_radius,
+        //     fast_planner::Polyhedron &out);
 
         void planYaw(const Eigen::Vector2d &start_yaw, const double end_yaw_set);
         rclcpp::TimerBase::SharedPtr control_cmd_pub, tf, safety_timer_, plan_timer, optimis;
@@ -570,6 +576,11 @@ namespace fast_planner
         std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
 
         std::string base_frame_;
+
+
+        std::string kino_replan_state_ = "not ready";
+        double search_cost_ = -1;
+        double optimize_cost_ = -1;
         EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     };
 }

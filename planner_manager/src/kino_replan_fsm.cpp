@@ -1,4 +1,5 @@
 #include "planner_manager/kino_replan_fsm.hpp"
+#include <iostream>
 using namespace fast_planner;
 
 
@@ -100,6 +101,137 @@ bool kino_replan_fsm::checkPredictPathCollision()
 
     return true;
 }
+// bool kino_replan_fsm::plan(Eigen::Vector2d position, Eigen::Vector2d vel_, Eigen::Vector2d acc_, Eigen::Vector2d end_pt, Eigen::Vector2d end_vel)
+// {
+//     kino_path_finder_->reset();
+//     start_time = rclcpp::Clock().now();
+
+//     int status = kino_path_finder_->search(position, vel_, acc_, end_pt, end_vel, true);
+//     auto an = rclcpp::Clock().now();
+
+//     if (status == KinodynamicAstar::NO_PATH)
+//     {
+//         std::cout << "[kino replan]: kinodynamic search fail!" << std::endl;
+
+//         // retry searching with discontinuous initial state
+//         kino_path_finder_->reset();
+//         status = kino_path_finder_->search(position, vel_, acc_, end_pt, end_vel, false);
+
+//         if (status == KinodynamicAstar::NO_PATH)
+//         {
+//             std::cout << "[kino replan]: Can't find path." << std::endl;
+//             have_traj = false;
+//             return false;
+//         }
+//         else
+//         {
+//             std::cout << "[kino replan]: retry search success." << std::endl;
+//         }
+//     }
+//     else
+//     {
+//         std::cout << "[kino replan]: kinodynamic search success." << std::endl;
+//     }
+
+//     auto n = rclcpp::Clock().now();
+//     std::cout << "搜索耗时: " << (n - an).seconds() * 1000 << " ms" << std::endl;
+
+//     // 获取路径点
+//     std::vector<Eigen::Vector2d> kino_path_ = kino_path_finder_->getKinoTraj(0.01);
+//     double ts = pp_.ctrl_pt_dist / pp_.max_vel_;
+//     std::vector<Eigen::Vector2d> point_set, start_end_derivatives;
+//     kino_path_finder_->getSamples(ts, point_set, start_end_derivatives);
+
+//     // 参数化为 B 样条
+//     Eigen::MatrixXd ctrl_pts;
+//     NonUniformBspline::parameterizeToBspline(ts, point_set, start_end_derivatives, ctrl_pts);
+
+//     // 生成通道
+//     std::vector<Polyhedron> corridor;
+//     bool corridor_success = bspline_optimizers_[0]->generateHomotopicCorridor(kino_path_, 0.1, corridor);
+//     if (!corridor_success)
+//     {
+//         std::cout << "[kino replan]: Can't find corridor." << std::endl;
+//         have_traj = false;
+//         return false;
+//     }
+
+//     // 设置代价函数
+//     int cost_function = BsplineOptimizer::NORMAL_PHASE;
+//     if (status != KinodynamicAstar::REACH_END)
+//     {
+//         cost_function |= BsplineOptimizer::ENDPOINT;
+//     }
+
+//     an = rclcpp::Clock().now();
+
+//     // 优化控制点
+//     if (corridor_success)
+//     {   std::cout << "[kino replan]: optimize with corridor." << std::endl;
+//        // ctrl_pts = bspline_optimizers_[0]->optimizeWithCorridor(ctrl_pts, ts, corridor);
+//         std::cout<< "[kino replan]: optimize with corridor success." << std::endl;
+
+//     }
+//     else
+//     {
+        
+//     }
+//     ctrl_pts = bspline_optimizers_[0]->BsplineOptimizeTraj(ctrl_pts, ts, cost_function, 1, 1);
+//     // 构建 B 样条轨迹
+//     NonUniformBspline pos(ctrl_pts, 3, ts);
+//     pos.setPhysicalLimits(pp_.max_vel_, pp_.max_acc_);
+
+//     // 可行性检查与时间调整
+//     bool feasible = pos.checkFeasibility(false);
+//     int iter_num = 0;
+//     while (!feasible && rclcpp::ok())
+//     {
+//         feasible = pos.reallocateTime();
+//         if (++iter_num >= 3)
+//             break;
+//     }
+
+//     n = rclcpp::Clock().now();
+//     std::cout << "优化耗时: " << (n - an).seconds() * 1000 << " ms" << std::endl;
+
+//     // 更新轨迹信息
+//     position_traj_ = pos;
+//     velocity_traj_ = position_traj_.getDerivative();
+//     acceleration_traj_ = velocity_traj_.getDerivative();
+//     duration_ = position_traj_.getTimeSum();
+//     planYaw(start_yaw_, target_yaw);
+
+//     bspline_process(10086);
+
+//     // 生成并发布路径
+//     std::vector<Eigen::Vector2d> traj_pts;
+//     double tm, tmp;
+//     pos.getTimeSpan(tm, tmp);
+
+//     for (double t = tm; t <= tmp; t += 0.01)
+//     {
+//         Eigen::Vector2d pt = pos.evaluateDeBoor(t);
+//         traj_pts.push_back(pt);
+//     }
+
+//     geometry_msgs::msg::PoseStamped current_pose;
+//     path_.header.stamp = this->now();
+//     path_.header.frame_id = "/map";
+//     path_.poses.clear();
+//     for (const auto &a : traj_pts)
+//     {
+//         current_pose.pose.position.x = a(0);
+//         current_pose.pose.position.y = a(1);
+//         current_pose.pose.position.z = 0.0;
+//         path_.poses.push_back(current_pose);
+//     }
+
+//     path_pub_->publish(path_);
+//     have_traj = true;
+
+//     return true;
+// }
+
 
 
 
@@ -113,30 +245,34 @@ bool kino_replan_fsm::plan(Eigen::Vector2d position,Eigen::Vector2d vel_,Eigen::
 
     if (status == KinodynamicAstar::NO_PATH)
     {
-        cout << "[kino replan]: kinodynamic search fail!" << endl;
-
+        //cout << "[kino replan]: kinodynamic search fail!" << endl;
+        kino_replan_state_="kinodynamic search fail!";
         // retry searching with discontinuous initial state
         kino_path_finder_->reset();
         status = kino_path_finder_->search(position, vel_, acc_, end_pt, end_vel, false);
 
         if (status == KinodynamicAstar::NO_PATH)
         {
-            cout << "[kino replan]: Can't find path." << endl;
+            //cout << "[kino replan]: Can't find path." << endl;
+            kino_replan_state_="Can't find path.";
             have_traj = false;
 
             return false;
         }
         else
         {
-            cout << "[kino replan]: retry search success." << endl;
+            //cout << "[kino replan]: retry search success." << endl;
+            kino_replan_state_="retry search success.";
         }
     }
     else
     {
-        cout << "[kino replan]: kinodynamic search success." << endl;
+        //cout << "[kino replan]: kinodynamic search success." << endl;
+        kino_replan_state_="kinodynamic search success.";
     }
     auto n = rclcpp::Clock().now();
-    std::cout << "搜索耗时::" << (n - an).seconds() * 1000 << "ms" << std::endl;
+    //std::cout << "搜索耗时::" << (n - an).seconds() * 1000 << "ms" << std::endl;
+    search_cost_ = (n - an).seconds() * 1000;
     vector<Eigen::Vector2d> kino_path_ = kino_path_finder_->getKinoTraj(0.01);
     double ts = pp_.ctrl_pt_dist / pp_.max_vel_;
     vector<Eigen::Vector2d> point_set, start_end_derivatives;
@@ -165,7 +301,8 @@ bool kino_replan_fsm::plan(Eigen::Vector2d position,Eigen::Vector2d vel_,Eigen::
             break;
     }
     n = rclcpp::Clock().now();
-    std::cout << "优化耗时::" << (n - an).seconds() * 1000 << "ms" << std::endl;
+    //std::cout << "优化耗时::" << (n - an).seconds() * 1000 << "ms" << std::endl;
+    optimize_cost_ = (n - an).seconds() * 1000;
 
     // have_traj = true;
     position_traj_ = pos;
@@ -178,12 +315,12 @@ bool kino_replan_fsm::plan(Eigen::Vector2d position,Eigen::Vector2d vel_,Eigen::
     vector<Eigen::Vector2d>
         traj_pts;
     double tm, tmp;
-    pos.getTimeSpan(tm, tmp);
+   pos.getTimeSpan(tm, tmp);
 
     for (double t = tm; t <= tmp; t += 0.01)
     {
-        Eigen::Vector2d pt = pos.evaluateDeBoor(t);
-        traj_pts.push_back(pt);
+       Eigen::Vector2d pt = pos.evaluateDeBoor(t);
+       traj_pts.push_back(pt);
     }
 
     geometry_msgs::msg::PoseStamped current_pose;
@@ -204,6 +341,91 @@ bool kino_replan_fsm::plan(Eigen::Vector2d position,Eigen::Vector2d vel_,Eigen::
 
     return true;
 }
+// bool kino_replan_fsm::plan(Eigen::Vector2d position, Eigen::Vector2d vel_, Eigen::Vector2d acc_, Eigen::Vector2d end_pt, Eigen::Vector2d end_vel)
+// {
+//     kino_path_finder_->reset();
+//     start_time = rclcpp::Clock().now();
+
+//     int status = kino_path_finder_->search(position, vel_, acc_, end_pt, end_vel, true);
+//     auto an = rclcpp::Clock().now();
+
+//     if (status == KinodynamicAstar::NO_PATH)
+//     {
+//         std::cout << "[kino replan]: kinodynamic search fail!" << std::endl;
+
+//         kino_path_finder_->reset();
+//         status = kino_path_finder_->search(position, vel_, acc_, end_pt, end_vel, false);
+
+//         if (status == KinodynamicAstar::NO_PATH)
+//         {
+//             std::cout << "[kino replan]: Can't find path." << std::endl;
+//             have_traj = false;
+//             return false;
+//         }
+//         else
+//         {
+//             std::cout << "[kino replan]: retry search success." << std::endl;
+//         }
+//     }
+//     else
+//     {
+//         std::cout << "[kino replan]: kinodynamic search success." << std::endl;
+//     }
+
+//     auto n = rclcpp::Clock().now();
+//     std::cout << "搜索耗时::" << (n - an).seconds() * 1000 << "ms" << std::endl;
+
+//     // 采样轨迹点并生成 B-spline 控制点
+//     std::vector<Eigen::Vector2d> point_set, start_end_derivatives;
+//     double ts = pp_.ctrl_pt_dist / pp_.max_vel_;
+//     kino_path_finder_->getSamples(ts, point_set, start_end_derivatives);
+
+//     Eigen::MatrixXd ctrl_pts;
+//     NonUniformBspline::parameterizeToBspline(ts, point_set, start_end_derivatives, ctrl_pts);
+
+//     // ❌ 跳过 B-spline 优化与可行性检查
+//     // ❌ 不使用 cost_function 和 BsplineOptimizer
+//     // ❌ 不进行 reallocateTime()
+
+//     NonUniformBspline pos(ctrl_pts, 3, ts);
+//     pos.setPhysicalLimits(pp_.max_vel_, pp_.max_acc_);
+
+//     // 发布轨迹
+//     position_traj_ = pos;
+//     velocity_traj_ = position_traj_.getDerivative();
+//     acceleration_traj_ = velocity_traj_.getDerivative();
+//     duration_ = position_traj_.getTimeSum();
+//     planYaw(start_yaw_, target_yaw);
+
+//     bspline_process(10086);
+
+//     // 填充轨迹消息
+//     std::vector<Eigen::Vector2d> traj_pts;
+//     double tm, tmp;
+//     pos.getTimeSpan(tm, tmp);
+//     for (double t = tm; t <= tmp; t += 0.01)
+//     {
+//         traj_pts.push_back(pos.evaluateDeBoor(t));
+//     }
+
+//     geometry_msgs::msg::PoseStamped current_pose;
+//     path_.header.stamp = this->now();
+//     path_.header.frame_id = "/map";
+//     path_.poses.clear();
+//     for (const auto &pt : traj_pts)
+//     {
+//         current_pose.pose.position.x = pt(0);
+//         current_pose.pose.position.y = pt(1);
+//         current_pose.pose.position.z = 0.;
+//         path_.poses.push_back(current_pose);
+//     }
+
+//     path_pub_->publish(path_);
+//     have_traj = true;
+
+//     return true;
+// }
+
 void kino_replan_fsm::bspline_process(double t)
 {
 
@@ -436,7 +658,7 @@ void calcNextYaw(const double &last_yaw, double &yaw)
 }
 void kino_replan_fsm::planYaw(const Eigen::Vector2d &start_yaw,const double end_yaw_set)
 {
-    RCLCPP_INFO(this->get_logger(), "plan yaw");
+    //RCLCPP_INFO(this->get_logger(), "plan yaw");
 
     auto t1 = rclcpp::Clock().now();
     // calculate waypoints of heading
@@ -511,7 +733,7 @@ void kino_replan_fsm::planYaw(const Eigen::Vector2d &start_yaw,const double end_
     // plan_data_.dt_yaw_ = dt_yaw;
     // plan_data_.dt_yaw_path_ = dt_yaw;
 
-    std::cout << "plan heading: " << (rclcpp::Clock().now() - t1).seconds() << std::endl;
+    //std::cout << "plan heading: " << (rclcpp::Clock().now() - t1).seconds() << std::endl;
 }
 
 #include "rclcpp_components/register_node_macro.hpp"
